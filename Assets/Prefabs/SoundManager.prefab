@@ -123,3 +123,39 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
     loop: 0
+  - name: DoorCreakingShort1
+    clip: {fileID: 8300000, guid: 34682cd2921773346ad1b8499bab0e9c, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: AntagonistSteps
+    clip: {fileID: 8300000, guid: 8f5c971851b17164daccfeaf27114370, type: 3}
+    volume: 0.8
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: HeartPulsBreath
+    clip: {fileID: 8300000, guid: 7dd735e944ded1243bf262b0f8f65d74, type: 3}
+    volume: 0.7
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Ambient_stage2
+    clip: {fileID: 8300000, guid: 804221151e2ca47418665dfd077468dd, type: 3}
+    volume: 0.7
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+  - name: Ambient_stage3
+    clip: {fileID: 8300000, guid: 3b9677d6ede52754a9ba146994c98d2f, type: 3}
+    volume: 0.7
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+  - name: Ambient_stage4
+    clip: {fileID: 8300000, guid: 9a07391fe1337dc4a9b5919cc6dbfdeb, type: 3}
+    volume: 0.7
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1

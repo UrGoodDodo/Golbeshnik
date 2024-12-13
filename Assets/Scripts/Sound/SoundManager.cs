@@ -10,6 +10,10 @@ public class SoundManager : MonoBehaviour
     public Sound[] sounds;
 
     private bool isCoroutine;
+    private MindController mindController;
+    private bool stage2Playing;
+    private bool stage3Playing;
+    private bool stage4Playing;
     void Awake()
     {
         foreach (Sound s in sounds)
@@ -22,6 +26,10 @@ public class SoundManager : MonoBehaviour
         }
 
     }
+    private void Start()
+    {
+        mindController = GameObject.FindGameObjectWithTag("MindController").GetComponent<MindController>();
+    }
     void Update()
     {
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
@@ -33,6 +41,41 @@ public class SoundManager : MonoBehaviour
             Stop("Walk");
             StopCoroutine("FootstepsCoroutine");
             isCoroutine = false;
+        }
+
+        //добавить условия, когда рассудок наоборот повышается
+
+        //Тоже самое с шагами, сделать, чтобы звуки менее резкие были
+        if (mindController.mindStatus == 6)
+        {
+            TurnOffAmbient();
+            stage3Playing = false;
+            stage2Playing = false;
+            stage4Playing = false;
+        }
+        if ((mindController.mindStatus == 5 || mindController.mindStatus == 4) && !stage2Playing)
+        {
+            AudioSource s = GetSource("Ambient_stage2");
+            s.Play();
+            s.volume = 0f;
+            StartCoroutine(VolumeIncrease(s));
+            stage2Playing = true;
+        }
+        if ((mindController.mindStatus == 3 || mindController.mindStatus == 2) && !stage3Playing)
+        {
+            AudioSource s = GetSource("Ambient_stage3");
+            s.Play();
+            s.volume = 0f;
+            StartCoroutine(VolumeIncrease(s));
+            stage3Playing = true;
+        }
+        if ((mindController.mindStatus == 0 || mindController.mindStatus == 1) && !stage4Playing)
+        {
+            AudioSource s = GetSource("Ambient_stage4");
+            s.Play();
+            s.volume = 0f;
+            StartCoroutine(VolumeIncrease(s));
+            stage4Playing = true;
         }
     }
 
@@ -77,7 +120,7 @@ public class SoundManager : MonoBehaviour
     {
         isCoroutine = true;
         AudioSource s = PlayWalk();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.2f);
         isCoroutine = false;
     }
 
@@ -112,12 +155,30 @@ public class SoundManager : MonoBehaviour
 
 
     }
+
+    public void TurnOffAmbient()
+    {
+        Stop("Ambient_stage2");
+        Stop("Ambient_stage3");
+        Stop("Ambient_stage4");
+    }
     private AudioSource GetSource(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
             return null;
         return s.source;
+    }
+    IEnumerator VolumeIncrease(AudioSource source)
+    {
+        float timeToFade = 5f;
+        float timeElapsed = 0;
+        while (timeElapsed < timeToFade)
+        {
+            source.volume = Mathf.Lerp(0, 0.7f, timeElapsed / timeToFade);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
     }
     private void LoadSounds()
     {

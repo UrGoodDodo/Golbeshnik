@@ -54,6 +54,7 @@ public class EventQTE2 : MonoBehaviour
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
         }
+        _soundManager.Play("HeartPulsBreath");
         PlayHearthBeat();
     }
     void Update()
@@ -129,8 +130,7 @@ public class EventQTE2 : MonoBehaviour
             Debug.Log("GAME OVER");
             _mindController.StopQTE();
         }
-        Debug.Log(passCount);
-        Debug.Log(mistakeCount);
+        _soundManager.Stop("HeartPulsBreath");
         Destroy(gameObject);
     }
 }

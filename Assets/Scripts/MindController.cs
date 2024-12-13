@@ -40,22 +40,26 @@ public class MindController : MonoBehaviour
         if (mindStatus == 0 && !isQTE)
         {
             _cameraBehaviour.ChangeVignette(currentVignette, vignetteMedium, 2f);
+            _cameraBehaviour.ChangeChromaticA(1);
             currentVignette = vignetteMedium;
             StartQTE();
         }
         if (mindStatus == 1 || mindStatus == 2)
         {
             _cameraBehaviour.ChangeVignette(currentVignette, vignetteMedium, 2f);
+            _cameraBehaviour.ChangeChromaticA(1);
             currentVignette = vignetteMedium;
         }
         if (mindStatus == 3 || mindStatus == 4)
         {
             _cameraBehaviour.ChangeVignette(currentVignette, vignetteLow, 2f);
+            _cameraBehaviour.ChangeChromaticA(0.5f);
             currentVignette = vignetteLow;
         }
         if (mindStatus == 5 || mindStatus == 6)
         {
             _cameraBehaviour.ChangeVignette(currentVignette, 0f, 2f);
+            _cameraBehaviour.ChangeChromaticA(0);
             currentVignette = 0f;
         }
     }
@@ -66,7 +70,7 @@ public class MindController : MonoBehaviour
     private IEnumerator CoroutineHearthPuls()
     {
         _cameraBehaviour.ChangeVignette(currentVignette, vignetteMax, 0.25f);
-        yield return new WaitForSeconds(0.25f);
+       yield return new WaitForSeconds(0.25f);
         _cameraBehaviour.ChangeVignette(currentVignette, vignetteMedium, 0.25f);
     }
     private void StartQTE()

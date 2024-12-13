@@ -67,4 +67,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _triggerValue: 1
-  _subTrigger: {fileID: 0}
+  _mindController: {fileID: 8191482358780520813, guid: f6251238eca2604408a8f55582dade0c, type: 3}

@@ -2,18 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubMindTriggerScript : MonoBehaviour
+public class SubMindTriggerScript : MindTriggerScript
 {
-    [SerializeField] int _triggerValue = 0;
     [SerializeField] MindTriggerScript _subTrigger;
-
-    private MindController _mindController;
-    bool _isActive = false;
-
-    private void Start()
-    {
-        _mindController = GetComponent<MindController>();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,8 +15,17 @@ public class SubMindTriggerScript : MonoBehaviour
                 if (other.gameObject.tag == "Player")
                 {
                     _mindController.DecreaseMindStatus(_triggerValue);
-                    Destroy(_subTrigger);
-                    Destroy(gameObject);
+                    _soundManager.Play(_sound);
+                    Destroy(_subTrigger.gameObject);
+                    if (_isSubTrigger)
+                    {
+                        _activateOtherTrigger = true;
+                        _isActive = true;
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
         }

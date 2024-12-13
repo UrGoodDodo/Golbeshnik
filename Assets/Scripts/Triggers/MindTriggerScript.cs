@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class MindTriggerScript : MonoBehaviour
 {
-    [SerializeField] int _triggerValue = 0;
+    public int _triggerValue = 0;
+    public string _sound;
+    public float _timer = 0f;
+    public bool _isSubTrigger = false;
 
-    private MindController _mindController;
-    private bool _activateOtherTrigger = false;
-    bool _isActive = false;
+    protected MindController _mindController;
+    protected SoundManager _soundManager;
+    protected bool _activateOtherTrigger = false;
+    protected bool _isActive = false;
 
     public bool _ActivateOtherTrigger { get => _activateOtherTrigger; }
 
-
-    private void Start()
+    public void Start()
     {
-        _mindController = GetComponent<MindController>();
+        _mindController = GameObject.FindWithTag("MindController").GetComponent<MindController>();
+        _soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,10 +29,17 @@ public class MindTriggerScript : MonoBehaviour
             if (!_isActive)
             {
                 _mindController.DecreaseMindStatus(_triggerValue);
-                _activateOtherTrigger = true;
-                _isActive = true;
+                _soundManager.Play(_sound);
+                if (_isSubTrigger)
+                {
+                    _activateOtherTrigger = true;
+                    _isActive = true;
+                }
+                else 
+                { 
+                    Destroy(gameObject); 
+                }
             }
-            //Destroy(gameObject);
         }
     }
 

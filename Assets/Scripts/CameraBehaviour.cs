@@ -59,6 +59,14 @@ public class CameraBehaviour : MonoBehaviour
         vignetteCoroutine = StartCoroutine(ChangeCoroutineValue(_startValue, _endValue, _duration));
     }
 
+    public void ChangeChromaticA(float _value = 0)
+    {
+        if (_chromaticAberration != null)
+        {
+            _chromaticAberration.intensity.value = _value;
+        }
+    }
+
 
     public void PulseVignette(float vignetteSpeed, float value_max = 1f, float value_min = 0)
     {

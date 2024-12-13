@@ -7703,7 +7703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &358716495
 Transform:
   m_ObjectHideFlags: 0
@@ -11184,7 +11184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482756645}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11212,7 +11212,7 @@ Transform:
   - {fileID: 2089014962}
   - {fileID: 1394491129}
   - {fileID: 2134557529}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 873317114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &504819900
 Mesh:
@@ -19349,6 +19349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MindTriggerSound
       objectReference: {fileID: 0}
+    - target: {fileID: 4306170341734638879, guid: fcd7ed25e76686d43ac3d7f033da352b, type: 3}
+      propertyPath: _sound
+      value: AntagonistSteps
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19794,6 +19798,77 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &781929113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 781929116}
+  - component: {fileID: 781929115}
+  - component: {fileID: 781929114}
+  m_Layer: 0
+  m_Name: TempSubTrigger (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &781929114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781929113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ca2f5dbca108d46b4ba07e2ceadf92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerValue: 2
+  _sound: 
+  _timer: 0
+  _isSubTrigger: 0
+  _subTrigger: {fileID: 920058766}
+--- !u!65 &781929115
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781929113}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7438238, y: 1, z: 1}
+  m_Center: {x: -0.12973773, y: 0, z: 0}
+--- !u!4 &781929116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781929113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.8, y: 0.43, z: 0.59}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &794575843
 GameObject:
   m_ObjectHideFlags: 0
@@ -20681,6 +20756,7 @@ Transform:
   - {fileID: 654403921}
   - {fileID: 631406907}
   - {fileID: 1505698927}
+  - {fileID: 482756646}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &896373113
@@ -21214,7 +21290,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca2f5dbca108d46b4ba07e2ceadf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerValue: 1
+  _triggerValue: 2
+  _sound: 
+  _timer: 0
+  _isSubTrigger: 1
   _subTrigger: {fileID: 1854682916}
 --- !u!65 &920058767
 BoxCollider:
@@ -21235,8 +21314,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.3309605, y: 1, z: 1}
-  m_Center: {x: -0.21082652, y: 0, z: 0}
+  m_Size: {x: 1.7438238, y: 1, z: 1}
+  m_Center: {x: -0.12973773, y: 0, z: 0}
 --- !u!4 &920058768
 Transform:
   m_ObjectHideFlags: 0
@@ -30552,6 +30631,22 @@ PrefabInstance:
       propertyPath: _vignetteSpeed
       value: 0.00005
       objectReference: {fileID: 0}
+    - target: {fileID: 4523310743543263737, guid: 04a0460855cd8b24c9e2ee0715fdf079, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523310743543263737, guid: 04a0460855cd8b24c9e2ee0715fdf079, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523310743543263737, guid: 04a0460855cd8b24c9e2ee0715fdf079, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523310743543263737, guid: 04a0460855cd8b24c9e2ee0715fdf079, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33355,6 +33450,10 @@ PrefabInstance:
     - target: {fileID: 5161001678347155254, guid: f6251238eca2604408a8f55582dade0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8191482358780520813, guid: f6251238eca2604408a8f55582dade0c, type: 3}
+      propertyPath: mindStatus
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9158420697450685592, guid: f6251238eca2604408a8f55582dade0c, type: 3}
       propertyPath: m_Name
@@ -42803,6 +42902,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MindTriggerSound
       objectReference: {fileID: 0}
+    - target: {fileID: 4306170341734638879, guid: fcd7ed25e76686d43ac3d7f033da352b, type: 3}
+      propertyPath: _sound
+      value: DoorCreakingShort1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306170341734638879, guid: fcd7ed25e76686d43ac3d7f033da352b, type: 3}
+      propertyPath: _isSubTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306170341734638879, guid: fcd7ed25e76686d43ac3d7f033da352b, type: 3}
+      propertyPath: _triggerValue
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -42927,14 +43038,17 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1482196940}
-  - {fileID: 1601563319}
   - {fileID: 873317114}
   - {fileID: 477853719}
   - {fileID: 1247393233}
-  - {fileID: 482756646}
   - {fileID: 5895416043175277343}
   - {fileID: 1870531791}
   - {fileID: 815757455}
   - {fileID: 920058768}
+  - {fileID: 781929116}
   - {fileID: 1433639610}
+<<<<<<< HEAD
   - {fileID: 4548626313392741625}
+=======
+  - {fileID: 1601563319}
+>>>>>>> main
