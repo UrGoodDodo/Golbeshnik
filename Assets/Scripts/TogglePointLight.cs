@@ -3,15 +3,12 @@ using UnityEngine;
 public class TogglePointLight : MonoBehaviour
 {
     public Light pointLight;
-    private GameObject player;
     private bool isLookingAtObject = false;
     private bool isLightOn = false;
 
 
     void Start()
     {
-
-        player = GameObject.Find("Player");
         if (pointLight == null)
         {
             Debug.LogError("Point Light component not assigned to this object!");
