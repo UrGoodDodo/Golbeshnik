@@ -3,17 +3,23 @@ using UnityEngine;
 public class TogglePointLight : MonoBehaviour
 {
     public Light pointLight;
+    private GameObject player;
     private bool isLookingAtObject = false;
     private bool isLightOn = false;
 
 
     void Start()
     {
+
+        player = GameObject.Find("Player");
         if (pointLight == null)
         {
             Debug.LogError("Point Light component not assigned to this object!");
             return;
         }
+        pointLight.enabled = false;
+
+
     }
 
 
@@ -22,7 +28,7 @@ public class TogglePointLight : MonoBehaviour
         //Проверка на наведение на объект
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        Debug.Log(isLookingAtObject);
+        //Debug.Log(isLookingAtObject);
         if (Physics.Raycast(ray, out hit))
         {
             //Debug.Log("Имя объекта: " + hit.transform.name);
@@ -41,15 +47,34 @@ public class TogglePointLight : MonoBehaviour
             isLookingAtObject = false;
         }
 
-        if (isLookingAtObject && Input.GetKeyDown(KeyCode.Y))
+        if (isLookingAtObject && Input.GetKeyDown(KeyCode.Y) )
         {
-            ToggleLight();
+            if (isLightOn == false)
+            {
+                if (PlayerController.matches >= 1)
+                {
+                    ToggleLightOn();
+                    PlayerController.matches -= 1;
+                    Debug.Log(PlayerController.matches);
+                }
+            }
+            else
+            {
+                ToggleLightOff();
+            }
         }
     }
 
-    void ToggleLight()
+    void ToggleLightOn()
     {
-        isLightOn = !isLightOn;
+        Debug.Log(isLightOn);
+        isLightOn = true;
+        Debug.Log(isLightOn);
+        pointLight.enabled = isLightOn;
+    }
+    void ToggleLightOff()
+    {
+        isLightOn = false;
         pointLight.enabled = isLightOn;
     }
 }
