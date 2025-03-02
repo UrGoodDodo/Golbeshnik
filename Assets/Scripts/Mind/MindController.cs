@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public sealed class MindController : MonoBehaviour
+public sealed class MindController : GameMonoBehaviour, IDayTwoStartListener
 {
     public GameObject hearthBeatQTE;
     [SerializeField] public int mindStatus;
@@ -20,8 +20,9 @@ public sealed class MindController : MonoBehaviour
 
     public static MindController Instance;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (Instance == null)
         {
             Instance = this;
@@ -32,6 +33,9 @@ public sealed class MindController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
+
 
     private void Start()
     {
@@ -96,5 +100,10 @@ public sealed class MindController : MonoBehaviour
     public void StopQTE()
     {
         isQTE = false;
+    }
+
+    void IDayTwoStartListener.OnDayTwoStart()
+    {
+        mindStatus = 6;
     }
 }

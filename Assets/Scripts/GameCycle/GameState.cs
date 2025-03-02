@@ -3,11 +3,11 @@
 /// </summary>
 public enum GameState
 {
-    OFF = 0,
-    PLAY = 1,
-    EVENT = 2,
-    PAUSE = 3,
-    FINISH = 4
+    OFF = 0, //Игровой процесс выключен
+    PLAY = 1, //Игровой процесс идет
+    EVENT = 2, //Идет ивент (например QTE)
+    PAUSE = 3, //Пауза
+    FINISH = 4 //Игровой процесс завершен
 }
 
 /// <summary>
@@ -15,8 +15,8 @@ public enum GameState
 /// </summary>
 public enum GameSubState
 {
-    NONE = 0,
-    DAY_ONE = 1,
-    DAY_TWO = 2,
-    DAY_THREE = 3
+    NONE = 0, 
+    DAY_ONE = 1, //День первый
+    DAY_TWO = 2, //День второй
+    DAY_THREE = 3 //День третий
 }

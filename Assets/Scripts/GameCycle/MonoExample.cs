@@ -99,7 +99,7 @@ public sealed class MonoExample : GameMonoBehaviour,
     /*
      4. Если вам нужны методы Awake или OnDestroy:
     */
-
+  
     protected override void Awake()
     {
         base.Awake();

@@ -45,21 +45,6 @@ public sealed class GameCycle : MonoBehaviour
     {
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
         else { Destroy(gameObject); }
-
-        //InitListenersFromHierarchy();
-    }
-
-    //Experimental: Это не нужно
-    private void InitListenersFromHierarchy()
-    {
-        _gameListeners = GetComponentsInChildren<IGameListener>().ToList();
-        _eventListeners = GetComponentsInChildren<IEventListener>().ToList();
-        _dayListeners = GetComponentsInChildren<IDayListener>().ToList();
-        _tickableListeners = GetComponentsInChildren<ITickable>().ToList();
-        foreach (ITickable listener in _tickableListeners)
-        {
-            AddTickableListener(listener);
-        }
     }
 
     //Это знать не нужно.
@@ -375,7 +360,7 @@ public sealed class GameCycle : MonoBehaviour
     [Button("Start Day One")]
     public void StartDayOne()
     {
-        if (_mainState == GameState.PLAY)
+        if (_mainState == GameState.PLAY && _subState != GameSubState.DAY_ONE)
         {
             _subState = GameSubState.DAY_ONE;
 
@@ -395,7 +380,7 @@ public sealed class GameCycle : MonoBehaviour
     [Button("Start Day Two")]
     public void StartDayTwo()
     {
-        if (_mainState == GameState.PLAY)
+        if (_mainState == GameState.PLAY && _subState != GameSubState.DAY_TWO)
         {
             _subState = GameSubState.DAY_TWO;
 
@@ -415,7 +400,7 @@ public sealed class GameCycle : MonoBehaviour
     [Button("Start Day Three")]
     public void StartDayThree()
     {
-        if (_mainState == GameState.PLAY)
+        if (_mainState == GameState.PLAY && _subState != GameSubState.DAY_THREE)
         {
             _subState = GameSubState.DAY_THREE;
 
