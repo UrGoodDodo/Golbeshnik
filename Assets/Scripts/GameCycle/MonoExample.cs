@@ -95,4 +95,26 @@ public sealed class MonoExample : GameMonoBehaviour,
     {
         Debug.Log("GAME start!");
     }
+
+    /*
+     4. Если вам нужны методы Awake или OnDestroy:
+    */
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        //Ваша реализация
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+
+        //Ваша реализация
+    }
+
+    /*
+     5. Все остальное по вашему желанию как и было до этого.
+    */
 }
