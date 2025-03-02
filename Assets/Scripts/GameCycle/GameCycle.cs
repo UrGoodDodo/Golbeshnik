@@ -6,10 +6,14 @@ using UnityEngine;
 
 public sealed class GameCycle : MonoBehaviour
 {
-    [ReadOnly]
-    public GameState _mainState;
-    [ReadOnly]
-    public GameSubState _subState;
+    [SerializeField, ReadOnly]
+    private GameState _mainState;
+    [SerializeField, ReadOnly]
+    private GameSubState _subState;
+
+    //Публичные поля для проверки текущего состояния из других классов
+    public GameState MainState { get { return _mainState; } }
+    public GameSubState SubState { get { return _subState; } }
 
     #region INIT LISTENERS
     private List<IGameListener> _gameListeners = new();
@@ -45,6 +49,8 @@ public sealed class GameCycle : MonoBehaviour
     {
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
         else { Destroy(gameObject); }
+        _mainState = GameState.OFF;
+        _subState = GameSubState.NONE;
     }
 
     //Это знать не нужно.

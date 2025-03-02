@@ -97,7 +97,7 @@ public sealed class MonoExample : GameMonoBehaviour,
     }
 
     /*
-     4. Если вам нужны методы Awake или OnDestroy:
+     4. Если нам нужны методы Awake или OnDestroy:
     */
   
     protected override void Awake()
@@ -115,6 +115,30 @@ public sealed class MonoExample : GameMonoBehaviour,
     }
 
     /*
-     5. Все остальное по вашему желанию как и было до этого.
+     6. Если нам нужно из нашего класса сказать что вызвалось определенное событие, например Начало второго дня:
+    */
+    private void DayTwoStart()
+    {
+        GameCycle.Instance.StartDayTwo();
+    }
+
+    /*
+     7. Если нам нужно в нашем классе проверить текущее состояние игры: 
+    */
+    private void YourFunction()
+    {
+        if (GameCycle.Instance.MainState == GameState.PLAY)
+        {
+            //Реализация если состояние == PLAY
+
+            if (GameCycle.Instance.SubState == GameSubState.DAY_THREE)
+            {
+                //Реализация если саб-состояние == DAY_THREE
+            }
+        }
+    }
+
+    /*
+     8. Остальное по вашему желанию как оно и было до этого.
     */
 }
