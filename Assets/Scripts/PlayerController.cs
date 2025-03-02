@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     }
     void FindQTE() 
     {
-        _qteManager = GameObject.FindWithTag("QTEManager").GetComponent<QTEManager>();
+        _qteManager = QTEManager.Instance;
         if (_qteManager != null)
         {
             _qteManager.StartQTEEvent += StartQTE;

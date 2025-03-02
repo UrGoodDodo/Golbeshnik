@@ -8,7 +8,7 @@ public class QuickTimeEvent : MonoBehaviour
 
     protected virtual void Start()
     {
-        _qteManager = GameObject.FindWithTag("QTEManager").GetComponent<QTEManager>();
+        _qteManager = QTEManager.Instance;
         _qteManager.StartQTE();
     }
 

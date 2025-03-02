@@ -18,7 +18,7 @@ public class MindTriggerScript : MonoBehaviour
 
     public void Start()
     {
-        _mindController = GameObject.FindWithTag("MindController").GetComponent<MindController>();
+        _mindController = MindController.Instance;
         _soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
     }
 

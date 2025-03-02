@@ -46,8 +46,8 @@ public class HeartBeat : QuickTimeEvent
             zoneObjects.Add(child.gameObject);
             zonePoints.Add(child.gameObject.GetComponent<RectTransform>().sizeDelta.x / 2 + child.gameObject.GetComponent<RectTransform>().anchoredPosition.x);
         }
-        _soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
-        _mindController = GameObject.FindWithTag("MindController").GetComponent<MindController>();
+        _soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>(); //TODO: оптимизация
+        _mindController = MindController.Instance;
         canvasGroup = QTEBar.GetComponent<CanvasGroup>();
         if (!visibleBar)
         {

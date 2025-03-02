@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
-        mindController = GameObject.FindGameObjectWithTag("MindController").GetComponent<MindController>();
+        mindController = MindController.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
     void Update()
