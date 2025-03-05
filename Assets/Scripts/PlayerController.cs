@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+    
     void FindQTE() 
     {
         _qteManager = QTEManager.Instance;
@@ -54,15 +55,17 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Событие нашлось");
         }
     }
+    
 
     void Update()
     {
-            
+        
         if (_qteManager == null)
         {
             FindQTE();
             Debug.Log("Ничего нет");
         }
+        
         if (isQTEActive)
         {
             return; // Игрок не может двигаться или вращать камеру
@@ -127,7 +130,7 @@ public class PlayerController : MonoBehaviour
         TogglePointLight lightCol = null;
         MatchBox _matchBox = null;
         DoorController _door = null;
-        Debug.Log(isLookingAtObject);
+        //Debug.Log(isLookingAtObject);
         if (Physics.Raycast(ray, out hit, 0.6f, rayMask))
         {
             Debug.Log(hit.transform.name);

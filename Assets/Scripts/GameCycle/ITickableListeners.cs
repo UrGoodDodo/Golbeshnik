@@ -25,20 +25,20 @@ public interface IGameLateTickable : ITickable
 }
 #endregion
 
-// Только во время игрового процесса, включая Ивенты (т.е. во время Паузы работать не будут)
-// (состояние = PLAY || состояние = EVENT)
-#region GAME AND EVENT
-public interface IGameEventTickable : ITickable
+// Только во время ивентов (во время Паузы и обычной игры работать не будут)
+// (состояние = EVENT)
+#region EVENT
+public interface IEventTickable : ITickable
 {
     void Tick(float deltaTime);
 }
 
-public interface IGameEventFixedTickable : ITickable
+public interface IEventFixedTickable : ITickable
 {
     void FixedTick(float deltaTime);
 }
 
-public interface IGameEventLateTickable : ITickable
+public interface IEventLateTickable : ITickable
 {
     void LateTick(float deltaTime);
 }

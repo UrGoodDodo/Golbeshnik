@@ -26,9 +26,9 @@ public sealed class GameCycle : MonoBehaviour
     private List<IGameFixedTickable> _gameFixedTickableListeners = new();
     private List<IGameLateTickable> _gameLateTickableListeners = new();
 
-    private List<IGameEventTickable> _gameEventTickableListeners = new();
-    private List<IGameEventFixedTickable> _gameEventFixedTickableListeners = new();
-    private List<IGameEventLateTickable> _gameEventLateTickableListeners = new();
+    private List<IEventTickable> _gameEventTickableListeners = new();
+    private List<IEventFixedTickable> _gameEventFixedTickableListeners = new();
+    private List<IEventLateTickable> _gameEventLateTickableListeners = new();
 
     private List<IDayOneTickable> _dayOneTickableListeners = new();
     private List<IDayOneFixedTickable> _dayOneFixedTickableListeners = new();
@@ -102,15 +102,15 @@ public sealed class GameCycle : MonoBehaviour
             _gameLateTickableListeners.Add(gameLateTickableListener);
         }
 
-        if (listener is IGameEventTickable gameEventTickableListener)
+        if (listener is IEventTickable gameEventTickableListener)
         {
             _gameEventTickableListeners.Add(gameEventTickableListener);
         }
-        if (listener is IGameEventFixedTickable gameEventFixedTickableListener)
+        if (listener is IEventFixedTickable gameEventFixedTickableListener)
         {
             _gameEventFixedTickableListeners.Add(gameEventFixedTickableListener);
         }
-        if (listener is IGameEventLateTickable gameEventLateTickableListener)
+        if (listener is IEventLateTickable gameEventLateTickableListener)
         {
             _gameEventLateTickableListeners.Add(gameEventLateTickableListener);
         }
@@ -172,15 +172,15 @@ public sealed class GameCycle : MonoBehaviour
             _gameLateTickableListeners.Remove(gameLateTickableListener);
         }
 
-        if (listener is IGameEventTickable gameEventTickableListener)
+        if (listener is IEventTickable gameEventTickableListener)
         {
             _gameEventTickableListeners.Remove(gameEventTickableListener);
         }
-        if (listener is IGameEventFixedTickable gameEventFixedTickableListener)
+        if (listener is IEventFixedTickable gameEventFixedTickableListener)
         {
             _gameEventFixedTickableListeners.Remove(gameEventFixedTickableListener);
         }
-        if (listener is IGameEventLateTickable gameEventLateTickableListener)
+        if (listener is IEventLateTickable gameEventLateTickableListener)
         {
             _gameEventLateTickableListeners.Remove(gameEventLateTickableListener);
         }
@@ -320,8 +320,8 @@ public sealed class GameCycle : MonoBehaviour
     /// Когда начинается любой особый ивент (например QTE).
     /// Состояние = EVENT;
     /// </summary>
-    [Button("Start Event")]
-    public void StartEvent()
+    [Button("Start Event (NOT work)")]
+    public void StartEvent(EventType eventType) //+номер сценария?
     {
         if (_mainState == GameState.PLAY)
         {
@@ -331,7 +331,7 @@ public sealed class GameCycle : MonoBehaviour
             {
                 if (it is IEventStartListener listener)
                 {
-                    listener.OnEventStart();
+                    listener.OnEventStart(eventType);
                 }
             }
         }
@@ -433,10 +433,6 @@ public sealed class GameCycle : MonoBehaviour
             {
                 gameTickable.Tick(time);
             }
-            foreach (IGameEventTickable eventTickable in _gameEventTickableListeners)
-            {
-                eventTickable.Tick(time);
-            }
             if (_subState == GameSubState.DAY_ONE)
             {
                 foreach (IDayOneTickable dayOneTickable in _dayOneTickableListeners)
@@ -461,7 +457,7 @@ public sealed class GameCycle : MonoBehaviour
         }
         else if (_mainState == GameState.EVENT)
         {
-            foreach (IGameEventTickable eventTickable in _gameEventTickableListeners)
+            foreach (IEventTickable eventTickable in _gameEventTickableListeners)
             {
                 eventTickable.Tick(time);
             }
@@ -479,10 +475,7 @@ public sealed class GameCycle : MonoBehaviour
             {
                 gameTickable.FixedTick(time);
             }
-            foreach (IGameEventFixedTickable eventTickable in _gameEventFixedTickableListeners)
-            {
-                eventTickable.FixedTick(time);
-            }
+
             if (_subState == GameSubState.DAY_ONE)
             {
                 foreach (IDayOneFixedTickable dayOneTickable in _dayOneFixedTickableListeners)
@@ -507,7 +500,7 @@ public sealed class GameCycle : MonoBehaviour
         }
         else if (_mainState == GameState.EVENT)
         {
-            foreach (IGameEventFixedTickable eventTickable in _gameEventFixedTickableListeners)
+            foreach (IEventFixedTickable eventTickable in _gameEventFixedTickableListeners)
             {
                 eventTickable.FixedTick(time);
             }
@@ -524,10 +517,7 @@ public sealed class GameCycle : MonoBehaviour
             {
                 gameTickable.LateTick(time);
             }
-            foreach (IGameEventLateTickable eventTickable in _gameEventLateTickableListeners)
-            {
-                eventTickable.LateTick(time);
-            }
+
             if (_subState == GameSubState.DAY_ONE)
             {
                 foreach (IDayOneLateTickable dayOneTickable in _dayOneLateTickableListeners)
@@ -552,11 +542,21 @@ public sealed class GameCycle : MonoBehaviour
         }
         else if (_mainState == GameState.EVENT)
         {
-            foreach (IGameEventLateTickable eventTickable in _gameEventLateTickableListeners)
+            foreach (IEventLateTickable eventTickable in _gameEventLateTickableListeners)
             {
                 eventTickable.LateTick(time);
             }
         }
     }
     #endregion
-}
+
+
+    #region DEBUG
+    [Button("Start HeartBeat Event")]
+    public void StartHeartBeatEvent()
+    {
+        StartEvent(EventType.HEARTH_BEAT);
+    }
+    #endregion
+
+    }
