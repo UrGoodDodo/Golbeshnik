@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public sealed class PlayerController : GameMonoBehaviour, IGameFixedTickable, IEventFixedTickable 
+    //, IEventFinishListener,IEventStartListener  , IDayThreeStartListener, IEventTickable
 {
     public float walkingSpeed = 3f;
     public float runningSpeed = 6f;
@@ -13,13 +14,14 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
-    private QTEManager _qteManager;
-    private bool isQTEActive = false;
+    //private QTEManager _qteManager;
+    //private bool isQTEActive = false;
     bool isLookingAtObject = false;
 
     public static int matches = 0;
-    public int Matches { 
-        get { return matches; } 
+    public int Matches
+    {
+        get { return matches; }
         set { matches = value; }
     }
 
@@ -44,32 +46,24 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    
-    void FindQTE() 
-    {
-        _qteManager = QTEManager.Instance;
-        if (_qteManager != null)
-        {
-            _qteManager.StartQTEEvent += StartQTE;
-            _qteManager.EndQTEEvent += StopQTE;
-            Debug.Log("Событие нашлось");
-        }
-    }
-    
 
-    void Update()
+
+    //void IEventStartListener.OnEventStart(EventType eventType)
+    //{
+    //    isQTEActive = true;
+    //}
+    //void IEventFinishListener.OnEventFinish()
+    //{
+    //    isQTEActive = false;
+    //}
+
+    void IEventFixedTickable.FixedTick(float deltaTime)
     {
-        
-        if (_qteManager == null)
-        {
-            FindQTE();
-            Debug.Log("Ничего нет");
-        }
-        
-        if (isQTEActive)
-        {
-            return; // Игрок не может двигаться или вращать камеру
-        }
+        return;
+    }
+    void IGameFixedTickable.FixedTick(float deltaTime)
+    {
+
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -109,18 +103,9 @@ public class PlayerController : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
         RaycastingToObjects();
-            
+
     }
-    void StartQTE()
-    {
-        isQTEActive = true;
-        Debug.Log("Событие началось");
-    }
-    void StopQTE()
-    {
-        isQTEActive = false;
-        Debug.Log("Событие закончилось");
-    }
+
 
     void RaycastingToObjects()
     {
@@ -141,7 +126,7 @@ public class PlayerController : MonoBehaviour
                 isLookingAtObject = true;
                 isLookingAtInteractiveObj?.Invoke(true);
             }
-            if(hit.transform.name == "Matchbox_01")
+            if (hit.transform.name == "Matchbox_01")
             {
                 _matchBox = hit.transform.GetComponent<MatchBox>();
                 isLookingAtObject = true;
@@ -200,5 +185,5 @@ public class PlayerController : MonoBehaviour
     }
 
 }
-    
+
 
