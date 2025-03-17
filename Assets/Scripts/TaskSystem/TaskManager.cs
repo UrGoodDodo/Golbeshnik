@@ -9,6 +9,11 @@ public class TaskManager : MonoBehaviour
     private void Awake()
     {
         taskMap = CreateTaskMap();
+
+        foreach (var item in taskMap)
+        {
+            Debug.Log(item.Value.info.TaskName);
+        }
     }
 
     private void OnEnable()

@@ -119,7 +119,7 @@ public sealed class PlayerController : GameMonoBehaviour, IGameFixedTickable, IE
         //Debug.Log(isLookingAtObject);
         if (Physics.Raycast(ray, out hit, 0.6f, rayMask))
         {
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
             //Debug.Log("Имя объекта: " + hit.transform.name);
             if (hit.transform.name == "Point Light")
             {

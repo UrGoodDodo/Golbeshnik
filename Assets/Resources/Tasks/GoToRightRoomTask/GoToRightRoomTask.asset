@@ -16,4 +16,5 @@ MonoBehaviour:
   TaskName: "\u041F\u043E\u0441\u0435\u0442\u0438 \u043D\u0443\u0436\u043D\u0443\u044E
     \u043A\u043E\u043C\u043D\u0430\u0442\u0443"
   taskPrerequisites: []
-  taskStepPrefabs: []
+  taskStepPrefabs:
+  - {fileID: 6955168033027364694, guid: 000368878506ebf43a8b12dd3dcae075, type: 3}

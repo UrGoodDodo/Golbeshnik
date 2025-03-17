@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshCollider), typeof(BoxCollider), typeof(SphereCollider))]
+[RequireComponent(typeof(BoxCollider))]
 public class TaskPoint : MonoBehaviour
 {
     private bool playerIsIn = false;
@@ -20,6 +20,11 @@ public class TaskPoint : MonoBehaviour
     private void Awake()
     {
         taskId = taskInfoForPoint.id;
+    }
+
+    private void Update()
+    {
+       // Debug.Log(Time.timeScale);
     }
 
     private void OnEnable()
@@ -58,12 +63,25 @@ public class TaskPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.tag);
+        
         if (other.CompareTag("Player"))
             playerIsIn = true;
+
+
+        if (!playerIsIn)
+            return;
+
+        if (curTaskState.Equals(TaskState.CAN_START) && startPoint)
+            GameEventsManager.instance.taskEvents.StartTask(taskId);
+        else if (curTaskState.Equals(TaskState.CAN_FINISH) && finishPoint)
+            GameEventsManager.instance.taskEvents.FinishTask(taskId);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log(other.tag);
+
         if (other.CompareTag("Player"))
             playerIsIn = false;
     }
