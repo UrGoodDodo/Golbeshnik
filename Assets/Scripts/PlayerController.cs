@@ -115,6 +115,7 @@ public sealed class PlayerController : GameMonoBehaviour, IGameFixedTickable, IE
         TogglePointLight lightCol = null;
         MatchBox _matchBox = null;
         DoorController _door = null;
+        Teleport _object = null;
         //Debug.Log(isLookingAtObject);
         if (Physics.Raycast(ray, out hit, 0.6f, rayMask))
         {
@@ -135,6 +136,12 @@ public sealed class PlayerController : GameMonoBehaviour, IGameFixedTickable, IE
             if (hit.transform.name == "Door")
             {
                 _door = hit.transform.GetComponent<DoorController>();
+                isLookingAtObject = true;
+                isLookingAtInteractiveObj?.Invoke(true);
+            }
+            if (hit.transform.name == "Ladder_01")
+            {
+                _object = hit.transform.GetComponent<Teleport>();
                 isLookingAtObject = true;
                 isLookingAtInteractiveObj?.Invoke(true);
             }
@@ -179,6 +186,10 @@ public sealed class PlayerController : GameMonoBehaviour, IGameFixedTickable, IE
             if (hit.transform.name == "Door")
             {
                 _door.ToggleDoor();
+            }
+            if (hit.transform.name == "Ladder_01")
+            {
+                _object.Interact(gameObject);
             }
 
         }
