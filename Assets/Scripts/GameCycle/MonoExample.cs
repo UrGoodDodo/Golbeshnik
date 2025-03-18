@@ -13,7 +13,7 @@ public sealed class MonoExample : GameMonoBehaviour,
     IGameResumeListener,
     IGameFinishListener,
     IGameFixedTickable,
-    IGameEventFixedTickable,
+    IEventFixedTickable,
     IDayOneFixedTickable,
     IDayTwoFixedTickable,
     IDayThreeFixedTickable,
@@ -31,9 +31,9 @@ public sealed class MonoExample : GameMonoBehaviour,
         Debug.Log("GAME Fixed Update");
     }
 
-    void IGameEventFixedTickable.FixedTick(float deltaTime)
+    void IEventFixedTickable.FixedTick(float deltaTime)
     {
-        Debug.Log("GAME EVENT Fixed Update");
+        Debug.Log("EVENT Fixed Update");
     }
 
     void IDayOneFixedTickable.FixedTick(float deltaTime)
@@ -71,9 +71,10 @@ public sealed class MonoExample : GameMonoBehaviour,
         Debug.Log("EVENT finish!");
     }
 
-    void IEventStartListener.OnEventStart()
+    void IEventStartListener.OnEventStart(EventType eventType)
     {
         Debug.Log("EVENT start!");
+        Debug.Log(eventType);
     }
 
     void IGameFinishListener.OnGameFinish()

@@ -27,22 +27,6 @@ public class CameraBehaviour : MonoBehaviour
     
     void FixedUpdate()
     {
-        //if (Input.GetKey(KeyCode.Q))
-        //{
-        //    if(!_isStartCotoutine)
-        //        ChangeVignette();
-        //}
-        //if (Input.GetKey(KeyCode.E))
-        //{
-        //    if(!_isStartCotoutine)
-        //        ChangeVignette(1, 0);
-        //}
-        //if (Input.GetKey(KeyCode.R))
-        //{
-        //    PulseVignette(0.00005f);
-        //}
-
-
     }
 
     public void ChangeVignette(float _startValue = 0, float _endValue = 1f, float _duration = 3f)

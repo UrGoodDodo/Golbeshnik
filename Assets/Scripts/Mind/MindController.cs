@@ -5,18 +5,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public sealed class MindController : GameMonoBehaviour, IDayTwoStartListener
+public sealed class MindController : GameMonoBehaviour,
+    IDayTwoStartListener,
+    IDayThreeStartListener,
+    IDayOneStartListener,
+    IEventFinishListener,
+    IEventStartListener
 {
-    public GameObject hearthBeatQTE;
-    [SerializeField] public int mindStatus;
-    [SerializeField] int maxMindStatus;
-    [SerializeField, Range(0f, 0.7f)] float vignetteMax = 0.75f;
-    [SerializeField, Range(0f, 0.7f)] float vignetteMedium = 0.60f;
-    [SerializeField, Range(0f, 0.7f)] float vignetteLow = 0.45f;
+    [SerializeField]
+    public int mindStatus;
+
+    [SerializeField]
+    int maxMindStatus;
+
+    [SerializeField, Range(0f, 0.7f)]
+    float vignetteMax = 0.75f;
+
+    [SerializeField, Range(0f, 0.7f)]
+    float vignetteMedium = 0.60f;
+
+    [SerializeField, Range(0f, 0.7f)]
+    float vignetteLow = 0.45f;
+
     private float currentVignette = 0f;
     private CameraBehaviour _cameraBehaviour;
     public bool isQTE = false;
-
 
     public static MindController Instance;
 
@@ -33,9 +46,6 @@ public sealed class MindController : GameMonoBehaviour, IDayTwoStartListener
             Destroy(gameObject);
         }
     }
-
-
-
 
     private void Start()
     {
@@ -60,7 +70,7 @@ public sealed class MindController : GameMonoBehaviour, IDayTwoStartListener
             _cameraBehaviour.ChangeVignette(currentVignette, vignetteMedium, 2f);
             _cameraBehaviour.ChangeChromaticA(1);
             currentVignette = vignetteMedium;
-            StartQTE();
+            StartHeartBeatEvent();
         }
         if (mindStatus == 1 || mindStatus == 2)
         {
@@ -91,19 +101,33 @@ public sealed class MindController : GameMonoBehaviour, IDayTwoStartListener
        yield return new WaitForSeconds(0.25f);
         _cameraBehaviour.ChangeVignette(currentVignette, vignetteMedium, 0.25f);
     }
-    private void StartQTE()
+    private void StartHeartBeatEvent()
     {
-        isQTE = true;
-        Instantiate(hearthBeatQTE, new Vector3(0, 0, 0), Quaternion.identity);
-    }
-
-    public void StopQTE()
-    {
-        isQTE = false;
+        GameCycle.Instance.StartEvent(EventType.HEARTH_BEAT);
     }
 
     void IDayTwoStartListener.OnDayTwoStart()
     {
         mindStatus = 6;
+    }
+
+    void IDayOneStartListener.OnDayOneStart()
+    {
+        mindStatus = 6;
+    }
+
+    void IDayThreeStartListener.OnDayThreeStart()
+    {
+        mindStatus = 6;
+    }
+
+    void IEventFinishListener.OnEventFinish()
+    {
+        isQTE = false;
+    }
+
+    void IEventStartListener.OnEventStart(EventType eventType)
+    {
+        isQTE = true;
     }
 }

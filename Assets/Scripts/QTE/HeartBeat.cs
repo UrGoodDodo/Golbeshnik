@@ -1,90 +1,132 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeartBeat : QuickTimeEvent
+public enum ZoneState
 {
+    POSITIVE = 0,
+    NEGATIVE = 1
+}
 
-    public GameObject point;
-    public GameObject QTEBar;
-    public GameObject QTEBarEasy;
-    public GameObject QTEBarMedium;
-    private RectTransform pointRect;
-    [SerializeField] float pointSpeed = 250f;
-    private List<GameObject> zoneObjects = new List<GameObject>();
-    private List<float> zonePoints = new List<float>();
-    private string currentZone = "positive";
-    private int currentZoneIndex = 0;
+
+public class HeartBeat : MonoBehaviour
+{
+    [SerializeField]
+    public List<float> scenarioOne;
+
+    [SerializeField]
+    public List<float> scenarioTwo;
+
+    [SerializeField]
+    private readonly int MIND_STATUS_UP = 4;
+
+    private List<float> scenario;
+
+    public event Action OnQTEFinish;
+
+    private float secondSpeed = 100f;
+    private float heartBeatTime = 58f;
+    private ZoneState currentZoneState = ZoneState.POSITIVE;
+    private float currentPosition = 0f;
+    private float endPosition;
+    private int currentIndex = 0;
+
     private bool passZone = true;
     private bool doubleClick = false;
+
     private int passCount = 0;
     private int mistakeCount = 0;
+
     private SoundManager _soundManager;
     private MindController _mindController;
-    private CanvasGroup canvasGroup;
-    [SerializeField] bool visibleBar = true;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        List<GameObject> difficultBars = new List<GameObject>() { QTEBarEasy, QTEBarMedium };
-        int k = Random.Range(0, 2);
-        for (int i = 0; i < 2; i++)
-        {
-            if (i != k)
-            {
-                difficultBars[i].GetComponent<CanvasGroup>().alpha = 0;
-            }
-        }
-        pointRect = point.GetComponent<RectTransform>();
-        foreach (Transform child in difficultBars[k].GetComponentsInChildren<Transform>())
-        {
-            if (child.gameObject == difficultBars[k])
-            {
-                continue;
-            }
-            zoneObjects.Add(child.gameObject);
-            zonePoints.Add(child.gameObject.GetComponent<RectTransform>().sizeDelta.x / 2 + child.gameObject.GetComponent<RectTransform>().anchoredPosition.x);
-        }
-        _soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>(); //TODO: оптимизация
+        _soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         _mindController = MindController.Instance;
-        canvasGroup = QTEBar.GetComponent<CanvasGroup>();
-        if (!visibleBar)
-        {
-            canvasGroup.alpha = 0;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-        }
-        _soundManager.Play("HeartPulsBreath");
-        PlayHearthBeat();
     }
-    void Update()
+
+    public void OnEventStart()
     {
-        if (pointRect.anchoredPosition.x <= zonePoints[zonePoints.Count - 1])
+        GetNewScenario();
+        GetNewSettings();
+        _soundManager.Play("HeartPulsBreath");
+        PlayBeatEnviroment();
+    }
+
+    private void GetNewScenario()
+    {
+        float currentInterval = heartBeatTime;
+        scenario = new();
+        scenario.Add(currentInterval);
+        List<float> currentScenario = new();
+        int k = UnityEngine.Random.Range(1, 3);
+        switch (k)
         {
-            pointRect.anchoredPosition = new Vector3(pointRect.anchoredPosition.x + pointSpeed * Time.deltaTime, pointRect.anchoredPosition.y, 0);
+            case 1:
+                currentScenario = scenarioOne;
+                break;
+            case 2:
+                currentScenario = scenarioTwo;
+                break;
         }
-        if (currentZoneIndex < zonePoints.Count && pointRect.anchoredPosition.x >= zonePoints[currentZoneIndex])
+        foreach (float interval in currentScenario)
         {
-            CheckZoneOnPass();
-            currentZoneIndex += 1;
-            if (currentZoneIndex == zonePoints.Count) { StopEvent(); }
-            if (currentZone == "positive") 
-            { 
-                currentZone = "negative";
-                passZone = true;
-            }
-            else 
+            currentInterval += interval;
+            scenario.Add(currentInterval);
+            currentInterval += heartBeatTime;
+            scenario.Add(currentInterval);
+        }
+        endPosition = currentInterval;
+    }
+
+    private void GetNewSettings()
+    {
+        currentPosition = 0;
+        currentIndex = 0;
+        passCount = 0;
+        mistakeCount = 0;
+        passZone = true;
+        doubleClick = false;
+        currentZoneState = ZoneState.POSITIVE;
+    }
+    private void PlayBeatEnviroment()
+    {
+        int k = UnityEngine.Random.Range(1, 4);
+        _soundManager.Play($"HearthBeat{k}");
+        _mindController.HearthPuls();
+    }
+
+    public void OnUpdate(float deltaTime)
+    {
+        if (currentPosition <= endPosition)
+        {
+            currentPosition = currentPosition + secondSpeed * deltaTime;
+            if (currentPosition > scenario[currentIndex])
             {
-                currentZone = "positive";
-                passZone = false;
-                PlayHearthBeat();
+                if (scenario[currentIndex] != endPosition) { currentIndex += 1; }
+                CheckZoneOnPass();
+                if (currentZoneState == ZoneState.POSITIVE)
+                {
+                    currentZoneState = ZoneState.NEGATIVE;
+                    passZone = true;
+                }
+                else
+                {
+                    currentZoneState = ZoneState.POSITIVE;
+                    passZone = false;
+                    PlayBeatEnviroment();
+                }
+                doubleClick = false;
             }
-            doubleClick = false;
+        }
+        else 
+        {
+            OnQTEFinish?.Invoke();
         }
         if (Input.GetButtonDown("CKey") || Input.GetButtonDown("VKey") || Input.GetButtonDown("UKey"))
         {
-            if (currentZone == "negative")
+            if (currentZoneState == ZoneState.NEGATIVE)
             {
                 passZone = false;
             }
@@ -101,38 +143,30 @@ public class HeartBeat : QuickTimeEvent
             }
         }
     }
-    void PlayHearthBeat()
+
+    private void CheckZoneOnPass()
     {
-        int k = Random.Range(1, 4);
-        _soundManager.Play($"HearthBeat{k}");
-        _mindController.HearthPuls();
-        
-    }
-    void CheckZoneOnPass()
-    {
-        if (passZone && !doubleClick && currentZone == "positive")
+        if (passZone && !doubleClick && currentZoneState == ZoneState.POSITIVE)
         {
             passCount++;
         }
-        else if (!passZone && currentZone == "negative")
+        else if (!passZone && currentZoneState == ZoneState.NEGATIVE)
         {
             mistakeCount++;
         }
     }
-    void StopEvent()
+    public void OnEventFinish()
     {
-        if ((int)(zonePoints.Count / 2) + 1 - passCount + mistakeCount <= 2)
+        if ((int)(scenario.Count / 2) + 1 - passCount + mistakeCount <= 2)
         {
-            _mindController.IncreaseMindStatus(4);
-            _mindController.StopQTE();
+            _mindController.IncreaseMindStatus(MIND_STATUS_UP);
         }
         else
         {
             Debug.Log("GAME OVER");
-            _mindController.StopQTE();
         }
         _soundManager.Stop("HeartPulsBreath");
-        Destroy(gameObject);
     }
+    
 }
 

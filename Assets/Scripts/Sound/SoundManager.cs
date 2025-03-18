@@ -5,8 +5,10 @@ using System.Collections;
 using UnityEngine.Rendering;
 using static Unity.VisualScripting.Member;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : GameMonoBehaviour,
+    IGameTickable
 {
+
     public Sound[] sounds;
 
     private bool isCoroutine;
@@ -17,8 +19,10 @@ public class SoundManager : MonoBehaviour
     PlayerController player;
     public GameObject antagonistMoving;
     public GameObject windDraft;
-    void Awake()
+
+    protected override void Awake()
     {
+        base.Awake();
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -34,7 +38,8 @@ public class SoundManager : MonoBehaviour
         mindController = MindController.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
-    void Update()
+
+    void IGameTickable.Tick(float deltaTime)
     {
         if (player.characterController.velocity.magnitude > 0.5f
             /*(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))*/)
@@ -43,7 +48,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-           // Stop("Walk");
+            // Stop("Walk");
             //StopCoroutine("FootstepsCoroutine");
             //isCoroutine = false;
         }
@@ -82,6 +87,7 @@ public class SoundManager : MonoBehaviour
             stage4Playing = true;
         }
     }
+
 
     public void Play(string name)
     {
@@ -192,10 +198,6 @@ public class SoundManager : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-    }
-    private void LoadSounds()
-    {
-        //возможно потом пригодится, когда добавится саундтрек
     }
 
     public void PlayRandomCandleLightUp()
