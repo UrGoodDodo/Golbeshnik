@@ -7,9 +7,6 @@ using UnityEngine.Rendering.Universal;
 
 public class CameraBehaviour : MonoBehaviour
 {
-    
-    public Transform _mainCamera;
-
     private Volume _postProcessingVolume;
     private Vignette _vignette;
     private ChromaticAberration _chromaticAberration;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SceneQTETrigger : MonoBehaviour
 {
-    
+    [SerializeField] IScenario _curScenario;
     [SerializeField] int _sceneNumber;
 
 
@@ -12,9 +12,11 @@ public class SceneQTETrigger : MonoBehaviour
     {
         if(other.tag == "player")
         {
-            //передавать номер сцены тригеру сценариев
-            //инвокать событие и передавать параметр номера сцены
-            //Action(sceneNum)
+            if(_curScenario != null)
+            {
+                _curScenario.StartScenario();
+                //спавын QTE
+            }
         }
     }
 
