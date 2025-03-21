@@ -63,7 +63,7 @@ public class TaskPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
+        Debug.Log("Что-то");
         
         if (other.CompareTag("Player"))
             playerIsIn = true;

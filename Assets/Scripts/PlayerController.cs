@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public sealed class PlayerController : GameMonoBehaviour, IGameFixedTickable, IEventFixedTickable 
-    //, IEventFinishListener,IEventStartListener  , IDayThreeStartListener, IEventTickable
+public sealed class PlayerController : GameMonoBehaviour, IEventFixedTickable, IGameTickable
+//, IEventFinishListener,IEventStartListener  , IDayThreeStartListener, IEventTickable
 {
     public float walkingSpeed = 3f;
     public float runningSpeed = 6f;
@@ -61,7 +61,7 @@ public sealed class PlayerController : GameMonoBehaviour, IGameFixedTickable, IE
     {
         return;
     }
-    void IGameFixedTickable.FixedTick(float deltaTime)
+    void IGameTickable.Tick(float deltaTime)
     {
 
         // We are grounded, so recalculate move direction based on axes
