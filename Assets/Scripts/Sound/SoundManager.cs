@@ -31,6 +31,7 @@ public class SoundManager : GameMonoBehaviour,
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+        LoadSounds();
 
     }
     private void Start()
@@ -249,5 +250,17 @@ public class SoundManager : GameMonoBehaviour,
             PlayWindDraft();
         else
             Play(name);
+    }
+    private void LoadSounds()
+    {
+        foreach(Sound s in sounds)
+        {
+            AudioSource source = GetSource(s.name);
+            float v = source.volume;
+            source.volume = 0f;
+            source.Play();
+            source.Stop();
+            source.volume = v;
+        }
     }
 }
