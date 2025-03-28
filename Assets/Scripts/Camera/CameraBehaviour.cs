@@ -27,6 +27,7 @@ public class CameraBehaviour : MonoBehaviour
     
     void FixedUpdate()
     {
+
     }
 
     public void ChangeVignette(float _startValue = 0, float _endValue = 1f, float _duration = 3f)
