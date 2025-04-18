@@ -8,6 +8,10 @@ public class GameEventsManager : MonoBehaviour
 
     public TaskEvents taskEvents;
 
+    public DialogEvents dialogEvents;
+
+    public LoreEvents loreEvents;
+
     private void Awake()
     {
         if (instance != null) 
@@ -17,5 +21,7 @@ public class GameEventsManager : MonoBehaviour
         instance = this;
 
         taskEvents = new TaskEvents();
+        dialogEvents = new DialogEvents();
+        loreEvents = new LoreEvents();
     }
 }
