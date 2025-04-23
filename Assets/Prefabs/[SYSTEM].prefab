@@ -94,6 +94,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3968659806702270428}
+  - component: {fileID: 4784817694672622593}
+  - component: {fileID: 818506738988804413}
   m_Layer: 0
   m_Name: QTEManager
   m_TagString: Untagged
@@ -116,6 +118,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3583502676256494577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4784817694672622593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635735428646572665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7081ea3055ed3664f8e7b18b9bdbe3e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenarioOne:
+  - 20
+  - 30
+  - 40
+  - 20
+  - 30
+  scenarioTwo:
+  - 20
+  - 30
+  - 40
+  - 20
+  - 30
+  - 40
+--- !u!114 &818506738988804413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635735428646572665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bffe574827ab53a449228a92a23db401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartBeatQTE: {fileID: 4784817694672622593}
+  defaultQTE: {fileID: 0}
 --- !u!1 &4057809699936736965
 GameObject:
   m_ObjectHideFlags: 0
