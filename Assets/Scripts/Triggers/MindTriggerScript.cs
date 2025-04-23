@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MindTriggerScript : MonoBehaviour
+public class MindTriggerScript : GameMonoBehaviour
 {
-    public int _triggerValue = 0;
-    public string _sound;
-    public float _timer = 0f;
-    public bool _isSubTrigger = false;
+    [SerializeField] protected int _triggerValue = 0;
+    [SerializeField] protected string _sound = null;
+    [SerializeField] protected float _timer = 0f;
+    [SerializeField] protected bool _isSubTrigger = false;
+    [SerializeField] protected GameSubState _dayNumber;
 
     protected MindController _mindController;
     protected SoundManager _soundManager;
@@ -24,23 +25,25 @@ public class MindTriggerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            if (!_isActive)
+        if(_dayNumber == GameCycle.Instance.SubState)
+            if (other.gameObject.tag == "Player")
             {
-                _mindController.DecreaseMindStatus(_triggerValue);
-                _soundManager.PlayTrigger(_sound);
-                if (_isSubTrigger)
+                if (!_isActive)
                 {
-                    _activateOtherTrigger = true;
-                    _isActive = true;
-                }
-                else 
-                { 
-                    Destroy(gameObject); 
+                    _mindController.DecreaseMindStatus(_triggerValue);
+                    if (_sound != null)
+                        _soundManager.Play(_sound);
+                    if (_isSubTrigger)
+                    {
+                        _activateOtherTrigger = true;
+                        _isActive = true;
+                    }
+                    else 
+                    { 
+                        Destroy(gameObject); 
+                    }
                 }
             }
-        }
     }
 
 

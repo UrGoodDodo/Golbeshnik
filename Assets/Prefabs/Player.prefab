@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 5564508352342422761}
   - component: {fileID: 671783259674163210}
   - component: {fileID: 4521595750842181783}
-  - component: {fileID: 3527517349365353945}
-  - component: {fileID: 6298932841895060055}
   m_Layer: 0
   m_Name: CutsceneCamera
   m_TagString: Untagged
@@ -192,30 +190,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: a4cefee493dea71499e3c46d6d0dd254, type: 2}
---- !u!114 &3527517349365353945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195858384310646354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9684cbed212e844b88b7b62d8514a44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6298932841895060055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195858384310646354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dda52b0bbe1bee742868b3ff41a9edf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2440370031105050851
 GameObject:
   m_ObjectHideFlags: 0
