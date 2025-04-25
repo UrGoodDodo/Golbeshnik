@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class LoreStateTransitionPoint : MonoBehaviour
 {
-    [Header("Собиытие в Лоре")]
+    [Header("Событие в Лоре")]
     [SerializeField] private LoreStateInfoSO loreInfoForPoint;
 
     private void Awake()

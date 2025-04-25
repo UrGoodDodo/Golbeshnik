@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87cdc1f9343ea0b49aba69550e247ca4, type: 3}
-  m_Name: BackToSleepLoreState
+  m_Name: 3_BackToSleepLoreState
   m_EditorClassIdentifier: 
   <loreStateId>k__BackingField: BackToSleepLoreState
   StateName: "\u0412\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C\u0441\u044F

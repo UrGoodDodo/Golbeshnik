@@ -21,4 +21,9 @@ public class LoreState
         // что-то делаем на выходе если надо
     }
 
+    public string GetStateId() 
+    {
+        return loreStateInfo.loreStateId;
+    }
+
 }

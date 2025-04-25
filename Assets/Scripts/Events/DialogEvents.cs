@@ -6,7 +6,7 @@ using UnityEngine;
 public class DialogEvents
 {
     public event Action<string> onPlayDialog;
-    public void StartTask(string dialogTxt)
+    public void StartDialog(string dialogTxt)
     {
         if (onPlayDialog != null)
             onPlayDialog(dialogTxt);

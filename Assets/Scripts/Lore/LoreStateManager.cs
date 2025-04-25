@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,10 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
     private void Awake()
     {
         loreStates = CreateLoreStates();
+        //foreach (var state in loreStates)
+        //{
+        //    Debug.Log(state.GetStateId());
+        //}
         curLoreState = loreStates.First();
     }
 
@@ -31,6 +36,7 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
 
     void Start()
     {
+
         curLoreState.Enter(); // пока хз когда начинать действия первого события но пусть пока тут
     }
 
@@ -43,14 +49,12 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
 
     public List<LoreState> CreateLoreStates() 
     {
-
         LoreStateInfoSO[] allStates = Resources.LoadAll<LoreStateInfoSO>("LoreStates" + nightNumber);
         List<LoreState> tempLoreStatesList = new List<LoreState>();
         foreach (LoreStateInfoSO stateInfo in allStates)
         {
-            tempLoreStatesList.Append(new LoreState(stateInfo));
+            tempLoreStatesList.Add(new LoreState(stateInfo));
         }
-
         return tempLoreStatesList;
     }
 

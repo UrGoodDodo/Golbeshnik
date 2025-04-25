@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87cdc1f9343ea0b49aba69550e247ca4, type: 3}
-  m_Name: FirstNightBeginLoreState
+  m_Name: 4_FirstNightEndLoreState
   m_EditorClassIdentifier: 
-  StateName: "\u041D\u0430\u0447\u0430\u043B\u043E 1 \u043D\u043E\u0447\u0438"
-  DialogText: "\u0427\u0442\u043E \u0437\u0430 \u0448\u0443\u043C?"
-  TaskId: GoToTheNursery
+  <loreStateId>k__BackingField: FirstNightEndLoreState
+  StateName: "\u041A\u043E\u043D\u0435\u0446 1 \u043D\u043E\u0447\u0438"
+  DialogText: 
+  StartingTaskId: 
+  FinishingTaskId: BackToSleepTask
