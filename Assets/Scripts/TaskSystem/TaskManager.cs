@@ -74,6 +74,8 @@ public class TaskManager : MonoBehaviour
 
         task.InstantiateCurrTaskStep(transform);
 
+        GameEventsManager.instance.uishowEvents.ShowTask(task.info.TaskName);
+
         ChangeTaskState(id, TaskState.IN_PROGRESS);
     }
 

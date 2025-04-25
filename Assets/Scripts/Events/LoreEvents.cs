@@ -6,7 +6,7 @@ using UnityEngine;
 public class LoreEvents
 {
     public event Action onLoreStateChange;
-    public void StartTask()
+    public void MoveToNextState()
     {
         if (onLoreStateChange != null)
             onLoreStateChange();

@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87cdc1f9343ea0b49aba69550e247ca4, type: 3}
-  m_Name: 4_FirstNightEndLoreState
+  m_Script: {fileID: 11500000, guid: 32ab369b745c24a49bbb12b755af428b, type: 3}
+  m_Name: BackToBedTask
   m_EditorClassIdentifier: 
-  <loreStateId>k__BackingField: 4_FirstNightEndLoreState
-  StateName: "\u041A\u043E\u043D\u0435\u0446 1 \u043D\u043E\u0447\u0438"
-  DialogText: 
-  StartingTaskId: 
+  <id>k__BackingField: BackToBedTask
+  TaskName: 
+  taskPrerequisites: []
+  taskStepPrefabs:
+  - {fileID: 1515253748938490394, guid: db41e5c5ba0c23b41b09370bb8865307, type: 3}

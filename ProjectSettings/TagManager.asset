@@ -8,6 +8,8 @@ TagManager:
   - SoundManager
   - MindController
   - QTEManager
+  - LoreTransition
+  - TaskWindow
   layers:
   - Default
   - TransparentFX

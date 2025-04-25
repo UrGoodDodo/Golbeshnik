@@ -9,19 +9,22 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
 
     List<LoreState> loreStates;
 
+    GameObject[] stateTransitions;
+
     public int nightNumber = 1;
 
-    private int curLoreStateNum = 0;
-    private LoreState curLoreState;
+    private int curLoreStateNum = -1;
+    private LoreState curLoreState = null;
 
     private void Awake()
     {
         loreStates = CreateLoreStates();
+        ConfigureTransitionsOnStage();
         //foreach (var state in loreStates)
         //{
         //    Debug.Log(state.GetStateId());
         //}
-        curLoreState = loreStates.First();
+        //curLoreState = loreStates.First();
     }
 
     private void OnEnable()
@@ -36,8 +39,7 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
 
     void Start()
     {
-
-        curLoreState.Enter(); // пока хз когда начинать действия первого события но пусть пока тут
+        //curLoreState.Enter(); пока хз когда начинать действия первого события но пусть пока тут
     }
 
     // Update is called once per frame
@@ -60,9 +62,32 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
 
     public void TransitionLoreStates() // Вызываем когда по сюжету надо (в основном точки)
     {
-        curLoreState.Exit();
+        if (curLoreState != null) 
+        {
+            curLoreState.Exit();
+        }
+
+        stateTransitions[curLoreStateNum + 1].SetActive(false); // т.к. предполагалось что транзит может и без триггеров это надо будет переделать (но надо ли)
+
         curLoreStateNum++;
         curLoreState = loreStates[curLoreStateNum];
         curLoreState.Enter();
+
+        if (curLoreStateNum + 1 < stateTransitions.Length)
+            stateTransitions[curLoreStateNum + 1].SetActive(true); // и это
+    }
+
+    public void ConfigureTransitionsOnStage() 
+    {
+        stateTransitions = GameObject.FindGameObjectsWithTag("LoreTransition");
+        
+        Array.Reverse(stateTransitions); // жеский костыль как и в recources(в лор событиях) -> можно потом подумать как переделать
+
+        stateTransitions[0].SetActive(true);
+        for (int i = 1; i < stateTransitions.Length; i++) 
+        {
+            stateTransitions[i].SetActive(false);
+        }
+
     }
 }

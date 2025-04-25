@@ -8,9 +8,11 @@ public class GameEventsManager : MonoBehaviour
 
     public TaskEvents taskEvents;
 
-    public DialogEvents dialogEvents;
+    public UIShowEvents uishowEvents;
 
     public LoreEvents loreEvents;
+
+    public RoomVisitingEvents roomVisitingEvents;
 
     private void Awake()
     {
@@ -21,7 +23,8 @@ public class GameEventsManager : MonoBehaviour
         instance = this;
 
         taskEvents = new TaskEvents();
-        dialogEvents = new DialogEvents();
+        uishowEvents = new UIShowEvents();
         loreEvents = new LoreEvents();
+        roomVisitingEvents = new RoomVisitingEvents();
     }
 }

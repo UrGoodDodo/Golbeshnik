@@ -16,8 +16,7 @@ public class LoreStateInfoSO : ScriptableObject
     public string DialogText; // –еплика или текст персонажа
 
     [Header("“асочки")]
-    public string StartingTaskId = null; // ≈сли есть начало таски то сюда ее айдишник
-    public string FinishingTaskId = null;
+    public string StartingTaskId; // ≈сли есть начало таски то сюда ее айдишник
 
     //можно добавить (наименовани€/ id / и т.д.) чтобы можно было это триггерить в начало лор событи€ или в конце
 

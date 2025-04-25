@@ -13,7 +13,10 @@ public class LoreState
 
     public void Enter() 
     {
-        // что-то делаем при заходе в стейт
+        if (loreStateInfo.DialogText != "")
+            GameEventsManager.instance.uishowEvents.StartDialog(loreStateInfo.DialogText);
+        if (loreStateInfo.StartingTaskId != "")
+            GameEventsManager.instance.taskEvents.StartTask(loreStateInfo.StartingTaskId);
     }
 
     public void Exit() 

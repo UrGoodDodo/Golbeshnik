@@ -12,6 +12,8 @@ public class PlayDialog : MonoBehaviour
 
     private CanvasGroup cnGroup;
 
+    public float delay = 0.05f;
+
     private void Awake()
     {
         uiText = GetComponentInChildren<TextMeshProUGUI>();
@@ -20,12 +22,12 @@ public class PlayDialog : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventsManager.instance.dialogEvents.onPlayDialog += PlayingDialog;
+        GameEventsManager.instance.uishowEvents.onPlayDialog += PlayingDialog;
     }
 
     private void OnDisable()
     {
-        GameEventsManager.instance.dialogEvents.onPlayDialog -= PlayingDialog;
+        GameEventsManager.instance.uishowEvents.onPlayDialog -= PlayingDialog;
     }
 
     public void PlayingDialog(string text)
@@ -39,13 +41,13 @@ public class PlayDialog : MonoBehaviour
         cnGroup.alpha = 1.0f;
 
         var time = text.Length * 0.05f + 2f;
-        StartCoroutine(PrintText(text, 0.05f));
+        StartCoroutine(PrintText(text));
         yield return new WaitForSeconds(time);
 
         cnGroup.alpha = 0.0f;
     }
 
-    IEnumerator PrintText(string str, float delay)
+    IEnumerator PrintText(string str)
     {
         var tt = uiText;
         var tts = "";

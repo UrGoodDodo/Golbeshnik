@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87cdc1f9343ea0b49aba69550e247ca4, type: 3}
   m_Name: 2_BeforeExitingFirstRoomLoreState
   m_EditorClassIdentifier: 
-  <loreStateId>k__BackingField: BeforeExitingFirstRoomLoreState
+  <loreStateId>k__BackingField: 2_BeforeExitingFirstRoomLoreState
   StateName: "\u041F\u0435\u0440\u0435\u0434 \u0432\u044B\u0445\u043E\u0434\u043E\u043C
     \u0438\u0437 1 \u043A\u043E\u043C\u043D\u0430\u0442\u044B"
   DialogText: "\u042D\u0442\u043E \u0438\u0437 \u0434\u0435\u0442\u0441\u043A\u043E\u0439\u2026"
   StartingTaskId: CheckTheNurseryTask
-  FinishingTaskId: 

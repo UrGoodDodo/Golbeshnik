@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DialogTrigger : MonoBehaviour
 {
+    [TextArea]
+    public string DialogText = "Здесь текст вашего диалога";
+
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Зашел");
-        GameEventsManager.instance.dialogEvents.StartDialog("Текст для диалога уау");
+        GameEventsManager.instance.uishowEvents.StartDialog(DialogText);
     }
 }

@@ -32,4 +32,5 @@ public class TaskEvents
         if (onTaskStateChange != null)
             onTaskStateChange(task);
     }
+
 }
