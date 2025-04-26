@@ -99,6 +99,7 @@ public class TaskManager : MonoBehaviour
     {
         Task task = GetTaskById(id);
         ChangeTaskState(id, TaskState.FINISHED);
+        GameEventsManager.instance.uishowEvents.DeleteTask();
     }
 
 

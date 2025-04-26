@@ -20,10 +20,10 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
     {
         loreStates = CreateLoreStates();
         ConfigureTransitionsOnStage();
-        //foreach (var state in loreStates)
-        //{
-        //    Debug.Log(state.GetStateId());
-        //}
+        foreach (var state in loreStates)
+        {
+            Debug.Log(state.GetStateId());
+        }
         //curLoreState = loreStates.First();
     }
 
@@ -81,7 +81,7 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
     {
         stateTransitions = GameObject.FindGameObjectsWithTag("LoreTransition");
         
-        Array.Reverse(stateTransitions); // жеский костыль как и в recources(в лор событиях) -> можно потом подумать как переделать
+        Array.Sort(stateTransitions, (a,b) => int.Parse(a.name).CompareTo(int.Parse(b.name))); // жеский костыль как и в recources(в лор событиях) -> можно потом подумать как переделать
 
         stateTransitions[0].SetActive(true);
         for (int i = 1; i < stateTransitions.Length; i++) 

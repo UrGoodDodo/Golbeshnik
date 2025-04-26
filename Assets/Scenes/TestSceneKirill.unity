@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 302634612}
   - component: {fileID: 302634611}
   m_Layer: 0
-  m_Name: 4_LoreEventsTrigger
+  m_Name: 4
   m_TagString: LoreTransition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 357324590}
   - component: {fileID: 357324589}
   m_Layer: 0
-  m_Name: 1_LoreEventsTrigger
+  m_Name: 1
   m_TagString: LoreTransition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1397,7 +1397,7 @@ GameObject:
   - component: {fileID: 869520252}
   - component: {fileID: 869520251}
   m_Layer: 0
-  m_Name: 3_LoreEventsTrigger
+  m_Name: 3
   m_TagString: LoreTransition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3276,7 +3276,7 @@ GameObject:
   - component: {fileID: 2049459502}
   - component: {fileID: 2049459501}
   m_Layer: 0
-  m_Name: 2_LoreEventsTrigger
+  m_Name: 2
   m_TagString: LoreTransition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
