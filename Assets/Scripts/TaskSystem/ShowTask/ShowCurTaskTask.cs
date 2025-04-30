@@ -45,6 +45,7 @@ public class ShowTask : MonoBehaviour
 
     IEnumerator ShowTaskWindow(string text) //поменять на плавное появление и исчезновения
     {
+        yield return new WaitForSeconds(2);
         bigTaskWindowGroup.alpha = 1.0f;
 
         var time = text.Length * 0.05f + 2f;
@@ -66,8 +67,9 @@ public class ShowTask : MonoBehaviour
         }
     }
 
-    void DeleteInfoAboutOldTask() 
+    void DeleteInfoAboutOldTask()
     {
+        Debug.Log("sdfsdf");
         taskText = "";
         smallTaskTxt.text = taskText;
     }

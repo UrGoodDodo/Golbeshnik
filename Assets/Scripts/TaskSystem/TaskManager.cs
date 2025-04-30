@@ -61,9 +61,9 @@ public class TaskManager : MonoBehaviour
 
     private void Update()
     {
-        foreach (var task in taskMap.Values) // Бегаем по тасочкам и смотрим можно ли их начать, ес да то обновляем их статус
+        foreach (var task in taskMap.Values) 
         {
-            if (task.state.Equals(TaskState.REQUIREMENTS_NOT_MET) && CheckRequirements(task))
+            if (task.state.Equals(TaskState.REQUIREMENTS_NOT_MET) && CheckRequirements(task)) // Бегаем по тасочкам и смотрим можно ли их начать, ес да то обновляем их статус
                 ChangeTaskState(task.info.id, TaskState.CAN_START);
         }
     }

@@ -3243,6 +3243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoomNumForTask: 1
+  taskInfo: {fileID: 11400000, guid: daf22c6dee6a10f46a2e911e07f72025, type: 2}
 --- !u!65 &2048601634
 BoxCollider:
   m_ObjectHideFlags: 0
