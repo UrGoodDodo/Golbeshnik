@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _director: {fileID: 922446856}
-  _scenarioCamera: {fileID: 217107136}
+  _scenarioCamera: {fileID: 481048166}
   _mainCamera: {fileID: 693052853}
 --- !u!65 &95046335
 BoxCollider:
