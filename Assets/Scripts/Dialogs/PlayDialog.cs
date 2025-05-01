@@ -12,7 +12,7 @@ public class PlayDialog : MonoBehaviour
 
     private CanvasGroup cnGroup;
 
-    public float delay = 0.05f;
+    public float delay = 0.1f;
 
     private void Awake()
     {
@@ -32,8 +32,8 @@ public class PlayDialog : MonoBehaviour
 
     public void PlayingDialog(string text)
     {
-        //Debug.Log("Попал");
-        StartCoroutine(PrintDialog(text));
+        //StartCoroutine(PrintDialog(text));
+        StartCoroutine(PrintDialogTextWithAlpha(text));
     }
 
     IEnumerator PrintDialog(string text) 
@@ -57,6 +57,26 @@ public class PlayDialog : MonoBehaviour
             tt.text = tts;
             yield return new WaitForSeconds(delay);
         }
+
+    }
+
+    IEnumerator PrintDialogTextWithAlpha(string text)
+    {
+        uiText.text = text;
+        for (float i = 0.0f; i < 1.0; i += 0.1f)
+        {
+            cnGroup.alpha = i;
+            yield return new WaitForSeconds(delay);
+        }
+        cnGroup.alpha = 1.0f;
+        yield return new WaitForSeconds(1f);
+
+        for (float i = 1.0f; i >= 0.0; i -= 0.1f)
+        {
+            cnGroup.alpha = i;
+            yield return new WaitForSeconds(delay);
+        }
+        cnGroup.alpha = 0.0f;
 
     }
 }

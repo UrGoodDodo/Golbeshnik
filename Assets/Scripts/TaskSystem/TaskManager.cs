@@ -10,10 +10,10 @@ public class TaskManager : MonoBehaviour
     {
         taskMap = CreateTaskMap();
 
-        foreach (var item in taskMap)
-        {
-            Debug.Log(item.Value.info.TaskName);
-        }
+        //foreach (var item in taskMap)
+        //{
+        //    Debug.Log(item.Value.info.TaskName);
+        //}
     }
 
     private void OnEnable()

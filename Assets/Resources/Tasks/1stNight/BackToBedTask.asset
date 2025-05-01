@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BackToBedTask
   m_EditorClassIdentifier: 
   <id>k__BackingField: BackToBedTask
-  TaskName: 
+  TaskName: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u0432 \u043A\u0440\u043E\u0432\u0430\u0442\u044C"
   taskPrerequisites: []
   taskStepPrefabs:
   - {fileID: 1515253748938490394, guid: db41e5c5ba0c23b41b09370bb8865307, type: 3}

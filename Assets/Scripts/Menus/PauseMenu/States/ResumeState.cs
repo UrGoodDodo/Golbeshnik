@@ -5,26 +5,23 @@ using UnityEngine;
 public class ResumeState : MenusState
 {
 
-    private PlayerController playerController;
-
-    public ResumeState(PlayerController pController) 
+    public ResumeState() 
     {
-        playerController = pController;
+
     }
 
     public override void Enter()
     {
-        Time.timeScale = 1f;
+        GameCycle.Instance.ResumeGame();
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        playerController.enabled = true;
     }
 
     public override void Exit()
     {
-        Time.timeScale = 0f;
+        GameCycle.Instance.PauseGame();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        playerController.enabled = false;
     }
 }

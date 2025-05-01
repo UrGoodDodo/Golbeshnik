@@ -40,7 +40,7 @@ public class UICore : MonoBehaviour
 
         if (menusstateType == typeof(ResumeState))
         {
-            newState = new ResumeState(GameObject.FindWithTag("Player").GetComponent<PlayerController>());
+            newState = new ResumeState();
             newState.AddTransition(new PauseGameTransition(uiInput));
 
         }

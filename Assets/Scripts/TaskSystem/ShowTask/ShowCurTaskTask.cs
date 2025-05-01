@@ -13,7 +13,7 @@ public class ShowTask : MonoBehaviour
 
     private TextMeshProUGUI smallTaskTxt;
 
-    public float delay = 0.05f;
+    public float delay = 0.1f;
 
     private void Awake()
     {
@@ -39,23 +39,51 @@ public class ShowTask : MonoBehaviour
     void ShowNewTask(string taskName) 
     {
         taskText = taskName;
-        smallTaskTxt.text = taskText;
-        StartCoroutine(ShowTaskWindow(taskName));
+        smallTaskTxt.text = taskName;
+        //StartCoroutine(ShowTaskWindowPerSymbol(taskName));
+        StartCoroutine(ShowTaskWindowWithAlpha(taskName));
     }
 
-    IEnumerator ShowTaskWindow(string text) //поменять на плавное появление и исчезновения
+    
+
+    IEnumerator ShowTaskWindowWithAlpha(string text) 
+    {
+        yield return new WaitForSeconds(2);
+        StartCoroutine(PrintTaskTextWithAlpha(text));
+
+    }
+
+    IEnumerator PrintTaskTextWithAlpha(string text) 
+    {
+        bigTaskTxt.text = text;
+        for (float i = 0.0f; i < 1.0; i += 0.1f) 
+        {
+            bigTaskWindowGroup.alpha = i;
+            yield return new WaitForSeconds(delay);
+        }
+        bigTaskWindowGroup.alpha = 1.0f;
+        yield return new WaitForSeconds(1f);
+        for (float i = 1.0f; i >= 0.0; i -= 0.1f)
+        {
+            bigTaskWindowGroup.alpha = i;
+            yield return new WaitForSeconds(delay);
+        }
+        bigTaskWindowGroup.alpha = 0.0f;
+    }
+
+    IEnumerator ShowTaskWindowPerSymbol(string text) //поменять на плавное появление и исчезновения
     {
         yield return new WaitForSeconds(2);
         bigTaskWindowGroup.alpha = 1.0f;
 
         var time = text.Length * 0.05f + 2f;
-        StartCoroutine(PrintTaskText(text));
+        StartCoroutine(PrintTaskTextPerSymbol(text));
         yield return new WaitForSeconds(time);
 
         bigTaskWindowGroup.alpha = 0.0f;
     }
 
-    IEnumerator PrintTaskText(string str)
+    IEnumerator PrintTaskTextPerSymbol(string str)
     {
         var tt = bigTaskTxt;
         var tts = "";
@@ -69,7 +97,6 @@ public class ShowTask : MonoBehaviour
 
     void DeleteInfoAboutOldTask()
     {
-        Debug.Log("sdfsdf");
         taskText = "";
         smallTaskTxt.text = taskText;
     }

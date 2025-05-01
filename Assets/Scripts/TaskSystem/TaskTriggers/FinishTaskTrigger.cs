@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class FinishTaskTrigger : MonoBehaviour
 {
-    public int RoomNumForTask = -1;
+    //public int RoomNumForTask = -1;
 
     [SerializeField]
     private TaskInfoSO taskInfo;

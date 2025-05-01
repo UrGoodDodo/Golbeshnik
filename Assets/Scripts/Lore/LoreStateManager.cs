@@ -20,10 +20,10 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
     {
         loreStates = CreateLoreStates();
         ConfigureTransitionsOnStage();
-        foreach (var state in loreStates)
-        {
-            Debug.Log(state.GetStateId());
-        }
+        //foreach (var state in loreStates)
+        //{
+        //    Debug.Log(state.GetStateId());
+        //}
         //curLoreState = loreStates.First();
     }
 
