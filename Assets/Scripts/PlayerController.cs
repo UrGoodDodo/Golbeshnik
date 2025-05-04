@@ -163,6 +163,8 @@ public sealed class PlayerController : GameMonoBehaviour, IEventFixedTickable, I
             {
                 matches += _matchBox.MatchesInBox;
 
+                GameEventsManager.instance.uishowEvents.AddNewMatches();
+
                 Destroy(hit.transform.gameObject);
 
                 _matchBox.soundManager.PlayRandomMatchPickUp();
@@ -175,6 +177,9 @@ public sealed class PlayerController : GameMonoBehaviour, IEventFixedTickable, I
                     {
                         lightCol.ToggleLightOn();
                         matches -= 1;
+
+                        GameEventsManager.instance.uishowEvents.UseMatch();
+
                         //Debug.Log(PlayerController.matches);
                     }
                 }

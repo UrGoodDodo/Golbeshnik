@@ -25,4 +25,18 @@ public class UIShowEvents
         if (onEndTask != null)
             onEndTask();
     }
+
+    public event Action onPickingMatchBox;
+    public void AddNewMatches() 
+    {
+        if (onPickingMatchBox != null)
+            onPickingMatchBox();
+    }
+
+    public event Action onUsingMatch;
+    public void UseMatch() 
+    {
+        if (onUsingMatch != null)
+            onUsingMatch();
+    }
 }

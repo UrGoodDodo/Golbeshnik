@@ -821,7 +821,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -3033667219593020291, guid: 7ab1e46454b39b1449d57c39df10ba25, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -860,7 +860,7 @@ Transform:
   m_GameObject: {fileID: 1080928029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -40.46, y: 1.29, z: 41.22}
+  m_LocalPosition: {x: -41.65, y: 1.36, z: 41.22}
   m_LocalScale: {x: 2.4193, y: 7.383704, z: 2.7700984}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1399,7 +1399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ac7161280912741936746cde0e4812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomNumForTask: 1
   taskInfo: {fileID: 11400000, guid: daf22c6dee6a10f46a2e911e07f72025, type: 2}
 --- !u!65 &2048601634
 BoxCollider:

@@ -75,11 +75,34 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
 
         if (curLoreStateNum + 1 < stateTransitions.Length)
             stateTransitions[curLoreStateNum + 1].SetActive(true); // и это
+
+        if (curLoreStateNum + 1 == stateTransitions.Length) 
+        {
+            switch (nightNumber)
+            {
+                case 1:
+                    GameCycle.Instance.StartDayTwo();
+                    Destroy(this);
+                    break;
+                case 2:
+                    GameCycle.Instance.StartDayThree();
+                    break;
+                default: break;
+            }
+        }
+            
     }
 
     public void ConfigureTransitionsOnStage() 
     {
-        stateTransitions = GameObject.FindGameObjectsWithTag("LoreTransition");
+        List<GameObject> children = new List<GameObject>();
+
+        foreach (Transform t in transform) 
+        {
+            children.Add(t.gameObject);
+        }
+
+        stateTransitions = children.ToArray();
         
         Array.Sort(stateTransitions, (a,b) => int.Parse(a.name).CompareTo(int.Parse(b.name))); // жеский костыль как и в recources(в лор событиях) -> можно потом подумать как переделать
 
