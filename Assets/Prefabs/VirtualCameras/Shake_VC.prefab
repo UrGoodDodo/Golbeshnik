@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1252737649875884184}
   - component: {fileID: 7512220152755170225}
+  - component: {fileID: 7233228226241833361}
   m_Layer: 0
   m_Name: Shake_VC
   m_TagString: Untagged
@@ -72,6 +73,19 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 4465873372694057222}
+--- !u!114 &7233228226241833361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7438498512144969073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df35d39d1114ae439ba051c5d7afb35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dayNumber: 0
 --- !u!1 &7644192512192818580
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ public sealed class EventManager : GameMonoBehaviour,
     IEventFinishListener,
     IEventTickable
 {
+    //scenario controller
     [SerializeField]
     private HeartBeat heartBeatQTE;
 
@@ -29,7 +30,7 @@ public sealed class EventManager : GameMonoBehaviour,
         heartBeatQTE.OnQTEFinish -= OnQTEFinish;
     }
 
-    void IEventStartListener.OnEventStart(EventType eventType)
+    void IEventStartListener.OnEventStart(EventType eventType) //+ int scenario number
     {
         qteFinished = false;
         currentEvent = eventType;
@@ -50,6 +51,7 @@ public sealed class EventManager : GameMonoBehaviour,
                 }
                 break;
         }
+        //scenario controller.play(int)
     }
 
     void IEventTickable.Tick(float deltaTime)
@@ -74,6 +76,7 @@ public sealed class EventManager : GameMonoBehaviour,
                 }
                 break;
         }
+        //scenario controller.stop(int)
     }
 
     private void OnQTEFinish()

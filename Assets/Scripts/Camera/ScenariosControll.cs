@@ -4,6 +4,7 @@ using UnityEngine.Timeline;
 using UnityEngine.Playables;
 using Cinemachine;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 
 public class ScenariosControll : GameMonoBehaviour, IScenario
 {
@@ -12,6 +13,22 @@ public class ScenariosControll : GameMonoBehaviour, IScenario
     [SerializeField] GameObject _mainCamera;
 
     private TimelineAsset _timelineAsset;
+
+    public static ScenariosControll Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null) 
+        { 
+            Instance = this; 
+            DontDestroyOnLoad(gameObject); 
+        }
+        else 
+        { 
+            Destroy(gameObject); 
+        }
+
+    }
 
     public void StartScenario(int scenarioNumber)
     {
