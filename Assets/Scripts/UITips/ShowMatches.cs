@@ -28,7 +28,7 @@ public class ShowMatches : MonoBehaviour
         GameEventsManager.instance.uishowEvents.onUsingMatch -= DeleteOneMatch;
     }
 
-    void AddFullMatchBox() { matchcount += 6; ReDrawUi(); }
+    void AddFullMatchBox() { matchcount += 5; ReDrawUi(); }
 
     void DeleteOneMatch() { matchcount--; ReDrawUi(); }
 
