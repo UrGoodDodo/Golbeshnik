@@ -110,7 +110,8 @@ public sealed class PlayerController : GameMonoBehaviour, IEventFixedTickable, I
     void RaycastingToObjects()
     {
         //Проверка на наведение на объект
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+         Ray ray = Camera.main.ScreenPointToRay(GetMousePosition());
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         TogglePointLight lightCol = null;
         MatchBox _matchBox = null;
@@ -198,6 +199,24 @@ public sealed class PlayerController : GameMonoBehaviour, IEventFixedTickable, I
             }
 
         }
+    }
+
+
+    private Vector2 GetMousePosition()
+    {
+        Vector2 mousePosition = Input.mousePosition;
+
+   
+        Vector2 normalizedMousePos = new Vector2(mousePosition.x / Screen.width, mousePosition.y / Screen.height);
+
+   
+        Vector2 renderTexMousePos = new Vector2(
+            normalizedMousePos.x * 400f,
+
+            normalizedMousePos.y * 225f
+        );
+        return renderTexMousePos;
+
     }
 
 }
