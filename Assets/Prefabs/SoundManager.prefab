@@ -124,14 +124,14 @@ MonoBehaviour:
     source: {fileID: 0}
     loop: 0
   - name: DoorCreakingShort1
-    clip: {fileID: 8300000, guid: 34682cd2921773346ad1b8499bab0e9c, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: fb1c5789a529bff46ad8a0163ccd24af, type: 3}
+    volume: 0.1
     pitch: 1
     source: {fileID: 0}
     loop: 0
   - name: AntagonistSteps
     clip: {fileID: 8300000, guid: 8f5c971851b17164daccfeaf27114370, type: 3}
-    volume: 0.8
+    volume: 0.85
     pitch: 1
     source: {fileID: 0}
     loop: 0
@@ -143,19 +143,57 @@ MonoBehaviour:
     loop: 0
   - name: Ambient_stage2
     clip: {fileID: 8300000, guid: 804221151e2ca47418665dfd077468dd, type: 3}
-    volume: 0.7
+    volume: 0
     pitch: 1
     source: {fileID: 0}
     loop: 1
   - name: Ambient_stage3
     clip: {fileID: 8300000, guid: 3b9677d6ede52754a9ba146994c98d2f, type: 3}
-    volume: 0.7
+    volume: 0
     pitch: 1
     source: {fileID: 0}
     loop: 1
   - name: Ambient_stage4
     clip: {fileID: 8300000, guid: 9a07391fe1337dc4a9b5919cc6dbfdeb, type: 3}
-    volume: 0.7
+    volume: 0
     pitch: 1
     source: {fileID: 0}
     loop: 1
+  - name: DoorSlamming
+    clip: {fileID: 8300000, guid: fb6be2f06cb95e242ae46f87abe74514, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: LightingUpCandle1
+    clip: {fileID: 8300000, guid: f15498acb9ae8ae4c9f6b72df143c3e5, type: 3}
+    volume: 0.8
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: LightingUpCandle2
+    clip: {fileID: 8300000, guid: 828f4ea42e0204b44984d46f55e5525f, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: MatchesPickUp1
+    clip: {fileID: 8300000, guid: d26f700a9d6e8a4408c11d314606132f, type: 3}
+    volume: 0.6
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: MatchesPickUp2
+    clip: {fileID: 8300000, guid: 47cd2e23a51a87d43968c72cff9681bc, type: 3}
+    volume: 0.6
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: MatchesPickUp3
+    clip: {fileID: 8300000, guid: 0e3fa8afe46ac434ab58f51de8931a3a, type: 3}
+    volume: 0.6
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  antagonistMoving: {fileID: 0}
+  windDraft: {fileID: 0}
