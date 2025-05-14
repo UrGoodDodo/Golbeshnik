@@ -43744,6 +43744,10 @@ PrefabInstance:
       propertyPath: _dayNumber
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4306170341734638879, guid: fcd7ed25e76686d43ac3d7f033da352b, type: 3}
+      propertyPath: _triggerValue
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -111754,6 +111758,14 @@ PrefabInstance:
       propertyPath: gameEventSystem
       value: 
       objectReference: {fileID: 2019764222}
+    - target: {fileID: 1312986218810979908, guid: 4e50166bcff4cce4ca0567d0dd9c6a1a, type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 1482196942}
+    - target: {fileID: 1312986218810979908, guid: 4e50166bcff4cce4ca0567d0dd9c6a1a, type: 3}
+      propertyPath: _scenarioCamera
+      value: 
+      objectReference: {fileID: 1482196941}
     - target: {fileID: 3583502676256494577, guid: 4e50166bcff4cce4ca0567d0dd9c6a1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.198455

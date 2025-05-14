@@ -42,6 +42,7 @@ public class ScenariosControll : GameMonoBehaviour, IScenario
 
         _completionSource = new();
         _timelineAsset = _director.playableAsset as TimelineAsset;
+        MuteAllScenarios(_timelineAsset);
 
         foreach (var track in _timelineAsset.GetOutputTracks())
         {

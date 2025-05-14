@@ -8,6 +8,13 @@ public sealed class GameEventSystem : MonoBehaviour
     [SerializeField] private QTESystem qteSystem;
     [SerializeField] private ScenariosControll scenarioSystem;
 
+    public static GameEventSystem Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
+        else { Destroy(gameObject); }
+    }
+
     public async UniTask StartEvent(QTEKey qte, int scenarioNumber)
     {
         if (GameCycle.Instance.MainState == GameState.EVENT)
