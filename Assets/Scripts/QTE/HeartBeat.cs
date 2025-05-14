@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class HeartBeat : MonoBehaviour
     private List<float> scenario;
 
     public event Action OnQTEFinish;
+    public event Action OnQTEStarted;
 
     private float secondSpeed = 100f;
     private float heartBeatTime = 58f;
@@ -46,12 +48,16 @@ public class HeartBeat : MonoBehaviour
         _mindController = MindController.Instance;
     }
 
-    public void OnEventStart()
+    public async UniTask StartEvent()
     {
+        this.OnQTEStarted?.Invoke();
         GetNewScenario();
         GetNewSettings();
         _soundManager.Play("HeartPulsBreath");
         PlayBeatEnviroment();
+        await this.HeartBeatAction();
+        OnEventFinish();
+        this.OnQTEFinish?.Invoke();
     }
 
     private void GetNewScenario()
@@ -97,11 +103,11 @@ public class HeartBeat : MonoBehaviour
         _mindController.HearthPuls();
     }
 
-    public void OnUpdate(float deltaTime)
+    public async UniTask HeartBeatAction()
     {
-        if (currentPosition <= endPosition)
+        while (currentPosition <= endPosition)
         {
-            currentPosition = currentPosition + secondSpeed * deltaTime;
+            currentPosition = currentPosition + secondSpeed * Time.deltaTime;
             if (currentPosition > scenario[currentIndex])
             {
                 if (scenario[currentIndex] != endPosition) { currentIndex += 1; }
@@ -119,11 +125,12 @@ public class HeartBeat : MonoBehaviour
                 }
                 doubleClick = false;
             }
+            await UniTask.Yield();
         }
-        else 
-        {
-            OnQTEFinish?.Invoke();
-        }
+    }
+
+    private void Update()
+    {
         if (Input.GetButtonDown("CKey") || Input.GetButtonDown("VKey") || Input.GetButtonDown("UKey"))
         {
             if (currentZoneState == ZoneState.NEGATIVE)
@@ -155,7 +162,7 @@ public class HeartBeat : MonoBehaviour
             mistakeCount++;
         }
     }
-    public void OnEventFinish()
+    private void OnEventFinish()
     {
         if ((int)(scenario.Count / 2) + 1 - passCount + mistakeCount <= 2)
         {

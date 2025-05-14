@@ -16,8 +16,9 @@ public class ScenariosControll : GameMonoBehaviour, IScenario
 
     public static ScenariosControll Instance { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (Instance == null) 
         { 
             Instance = this; 

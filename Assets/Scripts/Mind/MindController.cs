@@ -4,11 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Cysharp.Threading.Tasks;
 
 public sealed class MindController : GameMonoBehaviour,
-    IDayTwoStartListener,
-    IDayThreeStartListener,
-    IDayOneStartListener,
+    IDayStartListener,
     IEventFinishListener,
     IEventStartListener
 {
@@ -32,6 +31,8 @@ public sealed class MindController : GameMonoBehaviour,
     public bool isQTE = false;
 
     public static MindController Instance;
+
+    [SerializeField] private GameEventSystem gameEventSystem;
 
     protected override void Awake()
     {
@@ -95,28 +96,20 @@ public sealed class MindController : GameMonoBehaviour,
     {
         StartCoroutine(CoroutineHearthPuls());
     }
+
     private IEnumerator CoroutineHearthPuls()
     {
         _cameraBehaviour.ChangeVignette(currentVignette, vignetteMax, 0.25f);
        yield return new WaitForSeconds(0.25f);
         _cameraBehaviour.ChangeVignette(currentVignette, vignetteMedium, 0.25f);
     }
+
     private void StartHeartBeatEvent()
     {
-        GameCycle.Instance.StartEvent(EventType.HEARTH_BEAT);
+        gameEventSystem.StartEvent(QTEKey.HEART_BEAT).Forget();
     }
 
-    void IDayTwoStartListener.OnDayTwoStart()
-    {
-        mindStatus = 6;
-    }
-
-    void IDayOneStartListener.OnDayOneStart()
-    {
-        mindStatus = 6;
-    }
-
-    void IDayThreeStartListener.OnDayThreeStart()
+    void IDayStartListener.OnDayStart(GameSubState _)
     {
         mindStatus = 6;
     }
@@ -126,7 +119,7 @@ public sealed class MindController : GameMonoBehaviour,
         isQTE = false;
     }
 
-    void IEventStartListener.OnEventStart(EventType eventType)
+    void IEventStartListener.OnEventStart()
     {
         isQTE = true;
     }

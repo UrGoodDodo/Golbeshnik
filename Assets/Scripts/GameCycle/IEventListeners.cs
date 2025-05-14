@@ -6,7 +6,7 @@ public interface IEventListener : IListener { }; //Marker
 /// </summary>
 public interface IEventStartListener : IEventListener
 {
-    void OnEventStart(EventType eventType);
+    void OnEventStart();
 };
 /// <summary>
 /// Реализует функцию, которая вызывается при завершении какого-либо события (например QTE)

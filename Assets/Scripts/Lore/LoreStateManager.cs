@@ -81,11 +81,11 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
             switch (nightNumber)
             {
                 case 1:
-                    GameCycle.Instance.StartDayTwo();
+                    GameCycle.Instance.StartDay(GameSubState.DAY_TWO);
                     Destroy(this);
                     break;
                 case 2:
-                    GameCycle.Instance.StartDayThree();
+                    GameCycle.Instance.StartDay(GameSubState.DAY_THREE);
                     break;
                 default: break;
             }

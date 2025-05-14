@@ -16,7 +16,7 @@ public sealed class GameCycle : MonoBehaviour
     #region INIT LISTENERS
     private List<IGameListener> _gameListeners = new();
     private List<IEventListener> _eventListeners = new();
-    private List<IDayListener> _dayListeners = new();
+    private List<IDayStartListener> _dayListeners = new();
 
     private List<ITickable> _tickableListeners = new();
 
@@ -63,7 +63,7 @@ public sealed class GameCycle : MonoBehaviour
         {
             _eventListeners.Add(eventListener);
         }
-        if (listener is IDayListener dayListener)
+        if (listener is IDayStartListener dayListener)
         {
             _dayListeners.Add(dayListener);
         }
@@ -79,7 +79,7 @@ public sealed class GameCycle : MonoBehaviour
         {
             _eventListeners.Remove(eventListener);
         }
-        if (listener is IDayListener dayListener)
+        if (listener is IDayStartListener dayListener)
         {
             _dayListeners.Remove(dayListener);
         }
@@ -318,8 +318,8 @@ public sealed class GameCycle : MonoBehaviour
     /// Когда начинается любой особый ивент (например QTE).
     /// Состояние = EVENT;
     /// </summary>
-    [Button("Start Event (NOT work)")]
-    public void StartEvent(EventType eventType) //+номер сценария?
+    [Button("Start Event")]
+    public void StartEvent()
     {
         if (_mainState == GameState.PLAY)
         {
@@ -329,7 +329,7 @@ public sealed class GameCycle : MonoBehaviour
             {
                 if (it is IEventStartListener listener)
                 {
-                    listener.OnEventStart(eventType);
+                    listener.OnEventStart();
                 }
             }
         }
@@ -357,65 +357,37 @@ public sealed class GameCycle : MonoBehaviour
     #endregion
 
     #region DAYS
-    /// <summary>
-    /// Когда во время игрового процесса нужно вызвать День 1.
-    /// Саб-состояние = DAY ONE;
-    /// </summary>
+    public void StartDay(GameSubState subState)
+    {
+        if (_mainState == GameState.PLAY && _subState != subState)
+        {
+            _subState = subState;
+            foreach (var it in _dayListeners)
+            {
+                if (it is IDayStartListener listener)
+                {
+                    listener.OnDayStart(subState);
+                }
+            }
+        }
+    }
+
     [Button("Start Day One")]
-    public void StartDayOne()
+    private void StartDayOne()
     {
-        if (_mainState == GameState.PLAY && _subState != GameSubState.DAY_ONE)
-        {
-            _subState = GameSubState.DAY_ONE;
-
-            foreach (var it in _dayListeners)
-            {
-                if (it is IDayOneStartListener listener)
-                {
-                    listener.OnDayOneStart();
-                }
-            }
-        }
+        this.StartDay(GameSubState.DAY_ONE);
     }
-    /// <summary>
-    /// Когда во время игрового процесса нужно вызвать День 2.
-    /// Саб-состояние = DAY TWO;
-    /// </summary>
+
     [Button("Start Day Two")]
-    public void StartDayTwo()
+    private void StartDayTwo()
     {
-        if (_mainState == GameState.PLAY && _subState != GameSubState.DAY_TWO)
-        {
-            _subState = GameSubState.DAY_TWO;
-
-            foreach (var it in _dayListeners)
-            {
-                if (it is IDayTwoStartListener listener)
-                {
-                    listener.OnDayTwoStart();
-                }
-            }
-        }
+        this.StartDay(GameSubState.DAY_TWO);
     }
-    /// <summary>
-    /// Когда во время игрового процесса нужно вызвать День 3.
-    /// Саб-состояние = DAY THREE;
-    /// </summary>
-    [Button("Start Day Three")]
-    public void StartDayThree()
-    {
-        if (_mainState == GameState.PLAY && _subState != GameSubState.DAY_THREE)
-        {
-            _subState = GameSubState.DAY_THREE;
 
-            foreach (var it in _dayListeners)
-            {
-                if (it is IDayThreeStartListener listener)
-                {
-                    listener.OnDayThreeStart();
-                }
-            }
-        }
+    [Button("Start Day Three")]
+    private void StartDayThree()
+    {
+        this.StartDay(GameSubState.DAY_THREE);
     }
     #endregion
 
@@ -545,15 +517,6 @@ public sealed class GameCycle : MonoBehaviour
                 eventTickable.LateTick(time);
             }
         }
-    }
-    #endregion
-
-
-    #region DEBUG
-    [Button("Start HeartBeat Event")]
-    public void StartHeartBeatEvent()
-    {
-        StartEvent(EventType.HEARTH_BEAT);
     }
     #endregion
 

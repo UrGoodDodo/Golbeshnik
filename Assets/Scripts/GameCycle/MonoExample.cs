@@ -17,9 +17,7 @@ public sealed class MonoExample : GameMonoBehaviour,
     IDayOneFixedTickable,
     IDayTwoFixedTickable,
     IDayThreeFixedTickable,
-    IDayOneStartListener,
-    IDayTwoStartListener,
-    IDayThreeStartListener,
+    IDayStartListener,
     IEventStartListener,
     IEventFinishListener
 {
@@ -51,19 +49,9 @@ public sealed class MonoExample : GameMonoBehaviour,
         Debug.Log("DAY THREE Fixed Update");
     }
 
-    void IDayOneStartListener.OnDayOneStart()
+    void IDayStartListener.OnDayStart(GameSubState state)
     {
-        Debug.Log("DAY ONE start!");
-    }
-
-    void IDayThreeStartListener.OnDayThreeStart()
-    {
-        Debug.Log("DAY THREE start!");
-    }
-
-    void IDayTwoStartListener.OnDayTwoStart()
-    {
-        Debug.Log("DAY TWO start!");
+        Debug.Log(state);
     }
 
     void IEventFinishListener.OnEventFinish()
@@ -71,10 +59,9 @@ public sealed class MonoExample : GameMonoBehaviour,
         Debug.Log("EVENT finish!");
     }
 
-    void IEventStartListener.OnEventStart(EventType eventType)
+    void IEventStartListener.OnEventStart()
     {
         Debug.Log("EVENT start!");
-        Debug.Log(eventType);
     }
 
     void IGameFinishListener.OnGameFinish()
@@ -120,7 +107,7 @@ public sealed class MonoExample : GameMonoBehaviour,
     */
     private void DayTwoStart()
     {
-        GameCycle.Instance.StartDayTwo();
+        GameCycle.Instance.StartDay(GameSubState.DAY_TWO);
     }
 
     /*
