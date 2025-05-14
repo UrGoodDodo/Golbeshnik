@@ -1,5 +1,6 @@
 public enum QTEKey
 {
-    DEFAULT = 0,
-    HEART_BEAT = 1
+    NONE = 0,
+    DEFAULT = 1,
+    HEART_BEAT = 2
 }

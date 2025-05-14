@@ -106,7 +106,7 @@ public sealed class MindController : GameMonoBehaviour,
 
     private void StartHeartBeatEvent()
     {
-        gameEventSystem.StartEvent(QTEKey.HEART_BEAT).Forget();
+        gameEventSystem.StartEvent(QTEKey.HEART_BEAT, 0).Forget();
     }
 
     void IDayStartListener.OnDayStart(GameSubState _)

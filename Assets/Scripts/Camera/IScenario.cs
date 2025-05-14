@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,12 @@ public interface IScenario
     /// Функция старта сценария с номером scenarioNumber.
     /// </summary>
     /// 
-    public void StartScenario(int scenarioNumber);
+    UniTask StartScenario(int scenarioNumber);
 
     /// <summary>
     /// Функция остановки сценария.
     /// </summary>
     /// 
-    public void EndScenario();
+    void StopScenario();
 
 }

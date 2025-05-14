@@ -9,6 +9,8 @@ public sealed class QTESystem : MonoBehaviour
     {
         switch(key)
         {
+            case QTEKey.NONE:
+                break;
             case QTEKey.DEFAULT:
                 //Debug.Log("default qte");
                 break;

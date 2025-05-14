@@ -5,6 +5,7 @@ using UnityEngine.Playables;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
+using Cysharp.Threading.Tasks;
 
 public class ScenariosControll : GameMonoBehaviour, IScenario
 {
@@ -13,6 +14,7 @@ public class ScenariosControll : GameMonoBehaviour, IScenario
     [SerializeField] GameObject _mainCamera;
 
     private TimelineAsset _timelineAsset;
+    private UniTaskCompletionSource _completionSource = new();
 
     public static ScenariosControll Instance { get; private set; }
 
@@ -31,8 +33,14 @@ public class ScenariosControll : GameMonoBehaviour, IScenario
 
     }
 
-    public void StartScenario(int scenarioNumber)
+    public async UniTask StartScenario(int scenarioNumber)
     {
+        if (scenarioNumber == 0)
+        {
+            return;
+        }
+
+        _completionSource = new();
         _timelineAsset = _director.playableAsset as TimelineAsset;
 
         foreach (var track in _timelineAsset.GetOutputTracks())
@@ -44,17 +52,25 @@ public class ScenariosControll : GameMonoBehaviour, IScenario
                 _mainCamera.SetActive(false);
                 _scenarioCamera.gameObject.SetActive(true);
                 _director.Play();
-                break;
+                _director.stopped += this.OnScenarioStopped;
             } 
         }
+        await _completionSource.Task;
     }
 
-    public void EndScenario()
+    private void OnScenarioStopped(PlayableDirector _)
     {
+        _director.stopped -= this.OnScenarioStopped;
         _mainCamera.SetActive(true);
         _scenarioCamera.gameObject.SetActive(false);
-        _director.Stop();   
         MuteAllScenarios(_timelineAsset);
+
+        _completionSource.TrySetResult();
+    }
+
+    public void StopScenario()
+    {
+        _director.Stop();   
     }
 
     private void MuteAllScenarios(TimelineAsset timelineAsset)
