@@ -19,6 +19,8 @@ public class SoundManager : GameMonoBehaviour,
     PlayerController player;
     public GameObject antagonistMoving;
     public GameObject windDraft;
+    public GameObject knifeFall;
+    public GameObject door;
 
     protected override void Awake()
     {
@@ -180,7 +182,7 @@ public class SoundManager : GameMonoBehaviour,
             return null;
         return s.source;
     }
-    IEnumerator VolumeIncrease(AudioSource source, float timeToFade = 5f, float volume = 0.1f)
+    IEnumerator VolumeIncrease(AudioSource source, float timeToFade = 5f, float volume = 0.05f)
     {
         float timeElapsed = 0;
         while (timeElapsed < timeToFade)
@@ -241,6 +243,19 @@ public class SoundManager : GameMonoBehaviour,
     void PlayWindDraft()
     {
         windDraft.SetActive(true);
+        StartCoroutine(DoorCorot());
+        
+    }
+    void PlayKnifeFall()
+    {
+        knifeFall.SetActive(true);
+    }
+
+    IEnumerator DoorCorot()
+    {
+        yield return new WaitForSeconds(2f);
+        DoorController doorScript = door.GetComponent<DoorController>();
+        doorScript.ToggleDoor();
     }
     public void PlayTrigger(string name)
     {
@@ -248,6 +263,13 @@ public class SoundManager : GameMonoBehaviour,
             PlayAntagonist();
         else if (name == "DoorCreakingShort1")
             PlayWindDraft();
+        else if (name == "KnifeFall")
+            PlayKnifeFall();
+        else if (name == "Gasp2")
+        {
+            Stop("Whispering");
+            Play(name);
+        }
         else
             Play(name);
     }

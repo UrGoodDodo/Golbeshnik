@@ -41,7 +41,7 @@ public class MindTriggerScript : GameMonoBehaviour
                 {
                     _mindController.DecreaseMindStatus(_triggerValue);
                     if (_sound != null)
-                        _soundManager.Play(_sound);
+                        _soundManager.PlayTrigger(_sound);
                     if (_isSubTrigger)
                     {
                         _activateOtherTrigger = true;

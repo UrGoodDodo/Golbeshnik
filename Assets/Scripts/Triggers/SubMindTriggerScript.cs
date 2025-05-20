@@ -22,7 +22,7 @@ public class SubMindTriggerScript : MindTriggerScript
                         }
                         _mindController.DecreaseMindStatus(_triggerValue);
                         if(_sound != null)
-                            _soundManager.Play(_sound);
+                            _soundManager.PlayTrigger(_sound);
                         Destroy(_subTrigger.gameObject);
                         if (_isSubTrigger)
                         {

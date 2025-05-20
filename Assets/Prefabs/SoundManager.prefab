@@ -195,5 +195,31 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
     loop: 0
+  - name: Whispering
+    clip: {fileID: 8300000, guid: d89d7c3df9eb1e24fb49b329685e96c4, type: 3}
+    volume: 0.3
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Wind
+    clip: {fileID: 8300000, guid: e0137544688160e4e83515a5bf9caf6a, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Gasp
+    clip: {fileID: 8300000, guid: c33ee8e2f5d93844092490e44b4f77d0, type: 3}
+    volume: 0.15
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Gasp2
+    clip: {fileID: 8300000, guid: 06af876fae20def40983bf8adbbf44c7, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
   antagonistMoving: {fileID: 0}
   windDraft: {fileID: 0}
+  knifeFall: {fileID: 0}
+  door: {fileID: 0}
