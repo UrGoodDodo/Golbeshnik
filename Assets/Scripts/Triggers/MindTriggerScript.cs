@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class MindTriggerScript : GameMonoBehaviour
@@ -9,6 +10,9 @@ public class MindTriggerScript : GameMonoBehaviour
     [SerializeField] protected float _timer = 0f;
     [SerializeField] protected bool _isSubTrigger = false;
     [SerializeField] protected GameSubState _dayNumber;
+    [SerializeField] protected QTEKey _qteKey = QTEKey.HEART_BEAT;
+    [SerializeField] protected int _scenarioNumber;
+    [SerializeField] protected bool _isCutscene = false;
 
     protected MindController _mindController;
     protected SoundManager _soundManager;
@@ -26,8 +30,13 @@ public class MindTriggerScript : GameMonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(_dayNumber == GameCycle.Instance.SubState)
+        {
             if (other.gameObject.tag == "Player")
             {
+                if (_isCutscene)
+                {
+                    GameEventSystem.Instance.StartEvent(_qteKey, _scenarioNumber).Forget();
+                }
                 if (!_isActive)
                 {
                     _mindController.DecreaseMindStatus(_triggerValue);
@@ -44,6 +53,8 @@ public class MindTriggerScript : GameMonoBehaviour
                     }
                 }
             }
+
+        }
     }
 
 

@@ -1,5 +1,5 @@
 
-public interface IDayStartListener
+public interface IDayStartListener : IListener
 {
     void OnDayStart(GameSubState day);
 }

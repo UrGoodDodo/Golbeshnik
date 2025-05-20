@@ -8,6 +8,7 @@ public class StartGameTrigger : MonoBehaviour
     void Start()
     {
         GameCycle.Instance.StartGame();
+        GameCycle.Instance.StartDay(GameSubState.DAY_ONE);
     }
 
     // Update is called once per frame

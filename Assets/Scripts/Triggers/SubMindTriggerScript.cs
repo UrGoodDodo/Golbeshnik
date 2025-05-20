@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class SubMindTriggerScript : MindTriggerScript
@@ -15,6 +16,10 @@ public class SubMindTriggerScript : MindTriggerScript
                 {
                     if (other.gameObject.tag == "Player")
                     {
+                        if (_isCutscene)
+                        {
+                            GameEventSystem.Instance.StartEvent(_qteKey, _scenarioNumber).Forget();
+                        }
                         _mindController.DecreaseMindStatus(_triggerValue);
                         if(_sound != null)
                             _soundManager.Play(_sound);
