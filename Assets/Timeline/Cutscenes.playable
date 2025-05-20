@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8167380549352033991
+--- !u!114 &-8470270401042549832
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14,23 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: 
   VirtualCamera:
-    exposedName: cc9625f722fe5f64796ec2dc08adb703
-    defaultValue: {fileID: 0}
---- !u!114 &-1256299261706157571
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90fb794a295e73545af71bcdb7375791, type: 3}
-  m_Name: CinemachineShot
-  m_EditorClassIdentifier: 
-  DisplayName: 
-  VirtualCamera:
-    exposedName: 0732057ff1f29e7489189a34e8f832fa
+    exposedName: 21056197142bb884cae74db538d17563
     defaultValue: {fileID: 0}
 --- !u!114 &-681718434475944089
 MonoBehaviour:
@@ -219,7 +203,7 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects: []
---- !u!114 &5769507013888829289
+--- !u!114 &5692418631909211238
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: 
   VirtualCamera:
-    exposedName: dcad9ebb5f53b1f4d937f071f1c8b957
+    exposedName: ffbe67413a68e544094e3f16f441121f
     defaultValue: {fileID: 0}
 --- !u!114 &5929668857671192824
 MonoBehaviour:
@@ -250,6 +234,22 @@ MonoBehaviour:
   DisplayName: 
   VirtualCamera:
     exposedName: 8516446d8892dfa408540429483a2763
+    defaultValue: {fileID: 0}
+--- !u!114 &5946104438337913701
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fb794a295e73545af71bcdb7375791, type: 3}
+  m_Name: CinemachineShot
+  m_EditorClassIdentifier: 
+  DisplayName: 
+  VirtualCamera:
+    exposedName: 2dddd131a0d20a040b0b72c260e00b41
     defaultValue: {fileID: 0}
 --- !u!114 &7057280716211494295
 MonoBehaviour:
@@ -275,14 +275,14 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: -8167380549352033991}
-    m_Duration: 3.15
+    m_Asset: {fileID: 5692418631909211238}
+    m_Duration: 2.8
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7057280716211494295}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
-    m_BlendOutDuration: 1.6333333333333333
+    m_BlendOutDuration: 1.833333333333333
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -342,16 +342,16 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Shake_VC
   - m_Version: 1
-    m_Start: 1.5166666666666666
+    m_Start: 0.9666666666666667
     m_ClipIn: 0
-    m_Asset: {fileID: -1256299261706157571}
-    m_Duration: 4.199999999999999
+    m_Asset: {fileID: 5946104438337913701}
+    m_Duration: 4.516666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7057280716211494295}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 1.6333333333333333
-    m_BlendOutDuration: 1.7499999999999991
+    m_BlendInDuration: 1.833333333333333
+    m_BlendOutDuration: 1.5666666666666669
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -411,15 +411,15 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Zoom_VC
   - m_Version: 1
-    m_Start: 3.966666666666667
+    m_Start: 3.9166666666666665
     m_ClipIn: 0
-    m_Asset: {fileID: 5769507013888829289}
-    m_Duration: 4.666666666666667
+    m_Asset: {fileID: -8470270401042549832}
+    m_Duration: 4.7166666666666694
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7057280716211494295}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 1.7499999999999991
+    m_BlendInDuration: 1.5666666666666669
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2

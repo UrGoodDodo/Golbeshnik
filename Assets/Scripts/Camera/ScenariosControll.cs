@@ -49,8 +49,8 @@ public class ScenariosControll : GameMonoBehaviour, IScenario
             if (track.GetGroup().name == $"Scenario{scenarioNumber}")
             {
                 _director.SetGenericBinding(track, _scenarioCamera);
+                Debug.Log($"Play scenario {scenarioNumber}");
                 track.GetGroup().muted = false;
-                //_mainCamera.SetActive(false);
                 _scenarioCamera.gameObject.SetActive(true);
                 _director.Play();
                 _director.stopped += this.OnScenarioStopped;
@@ -62,10 +62,10 @@ public class ScenariosControll : GameMonoBehaviour, IScenario
     private void OnScenarioStopped(PlayableDirector _)
     {
         _director.stopped -= this.OnScenarioStopped;
-        //_mainCamera.SetActive(true);
         _scenarioCamera.gameObject.SetActive(false);
         MuteAllScenarios(_timelineAsset);
 
+        Debug.Log($"Stop scenario");
         _completionSource.TrySetResult();
     }
 
