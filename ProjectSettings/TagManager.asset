@@ -10,6 +10,7 @@ TagManager:
   - QTEManager
   - LoreTransition
   - TaskWindow
+  - CutSceneCamera
   layers:
   - Default
   - TransparentFX

@@ -78,7 +78,7 @@ Material:
     - _Fullscreen_SrcAlphaBlend: 1
     - _Fullscreen_SrcColorBlend: 5
     - _LineSpeed: 19.02
-    - _LinesAmount: 0.03
+    - _LinesAmount: 0.01
     - _NoiseAmount: 0.06
     - _NoiseScale: 1914.4
     - _QueueControl: 0

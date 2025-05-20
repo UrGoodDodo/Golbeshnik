@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -32,6 +33,11 @@ public class CameraBehaviour : MonoBehaviour
             StopCoroutine(vignetteCoroutine);
             _startValue = _vignette.intensity.value; 
         }
+        if (!this.gameObject.activeSelf)
+        {
+            _vignette.intensity.value = _endValue;
+            return;
+        }
         vignetteCoroutine = StartCoroutine(ChangeCoroutineValue(_startValue, _endValue, _duration));
     }
 
@@ -40,21 +46,6 @@ public class CameraBehaviour : MonoBehaviour
         if (_chromaticAberration != null)
         {
             _chromaticAberration.intensity.value = _value;
-        }
-    }
-
-
-    public void PulseVignette(float vignetteSpeed, float value_max = 1f, float value_min = 0)
-    {
-       if(value_max > 1f) { value_max = 1f; }
-       if(value_max < 0) { value_max = 0; }
-
-       if(_vignette.intensity.value <= value_max)
-        {
-            if(_vignette.intensity.value >= value_min)
-            {
-                _vignette.intensity.value = Mathf.Sin(Time.realtimeSinceStartup);
-            }
         }
     }
 

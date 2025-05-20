@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Cysharp.Threading.Tasks;
+using UnityEngine.Rendering;
 
 public sealed class MindController : GameMonoBehaviour,
     IDayStartListener,
@@ -27,7 +28,10 @@ public sealed class MindController : GameMonoBehaviour,
     float vignetteLow = 0.45f;
 
     private float currentVignette = 0f;
-    private CameraBehaviour _cameraBehaviour;
+
+    [SerializeField] private CameraBehaviour _mainCamera;
+    [SerializeField] private CameraBehaviour _cutsceneCamera;
+
     public bool isQTE = false;
 
     public static MindController Instance;
@@ -48,10 +52,6 @@ public sealed class MindController : GameMonoBehaviour,
         }
     }
 
-    private void Start()
-    {
-        _cameraBehaviour = GameObject.FindWithTag("MainCamera").GetComponent<CameraBehaviour>();
-    }
     public void IncreaseMindStatus(int value)
     {
         mindStatus = Mathf.Min(maxMindStatus, mindStatus + value);
@@ -68,30 +68,37 @@ public sealed class MindController : GameMonoBehaviour,
         Debug.Log(mindStatus);
         if (mindStatus == 0 && !isQTE)
         {
-            _cameraBehaviour.ChangeVignette(currentVignette, vignetteMedium, 2f);
-            _cameraBehaviour.ChangeChromaticA(1);
+            this.ChangeVignette(_mainCamera, currentVignette, vignetteMedium, 2f, 1);
+            this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMedium, 2f, 1);
             currentVignette = vignetteMedium;
             StartHeartBeatEvent();
         }
         if (mindStatus == 1 || mindStatus == 2)
         {
-            _cameraBehaviour.ChangeVignette(currentVignette, vignetteMedium, 2f);
-            _cameraBehaviour.ChangeChromaticA(1);
+            this.ChangeVignette(_mainCamera, currentVignette, vignetteMedium, 2f, 1);
+            this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMedium, 2f, 1);
             currentVignette = vignetteMedium;
         }
         if (mindStatus == 3 || mindStatus == 4)
         {
-            _cameraBehaviour.ChangeVignette(currentVignette, vignetteLow, 2f);
-            _cameraBehaviour.ChangeChromaticA(0.5f);
+            this.ChangeVignette(_mainCamera, currentVignette, vignetteLow, 2f, 0.5f);
+            this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteLow, 2f, 0.5f);
             currentVignette = vignetteLow;
         }
         if (mindStatus == 5 || mindStatus == 6)
         {
-            _cameraBehaviour.ChangeVignette(currentVignette, 0f, 2f);
-            _cameraBehaviour.ChangeChromaticA(0);
+            this.ChangeVignette(_mainCamera, currentVignette, 0f, 2f, 0);
+            this.ChangeVignette(_cutsceneCamera, currentVignette, 0f, 2f, 0);
             currentVignette = 0f;
         }
     }
+
+    private void ChangeVignette(CameraBehaviour camera, float start, float end, float duration, float chromatica)
+    {
+        camera.ChangeVignette(start, end, duration);
+        camera.ChangeChromaticA(chromatica);
+    }
+
     public void HearthPuls()
     {
         StartCoroutine(CoroutineHearthPuls());
@@ -99,9 +106,11 @@ public sealed class MindController : GameMonoBehaviour,
 
     private IEnumerator CoroutineHearthPuls()
     {
-        _cameraBehaviour.ChangeVignette(currentVignette, vignetteMax, 0.25f);
+        this.ChangeVignette(_mainCamera, currentVignette, vignetteMax, 0.25f, 1);
+        this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMax, 0.25f, 1);
        yield return new WaitForSeconds(0.25f);
-        _cameraBehaviour.ChangeVignette(currentVignette, vignetteMedium, 0.25f);
+        this.ChangeVignette(_mainCamera, currentVignette, vignetteMedium, 0.25f, 1);
+        this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMedium, 0.25f, 1);
     }
 
     private void StartHeartBeatEvent()
