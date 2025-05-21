@@ -18,16 +18,22 @@ public class CameraBehaviour : MonoBehaviour
     {
         _postProcessingVolume = GetComponent<Volume>();
         Vignette vgt;
+        Debug.Log($"{this.gameObject} | - | {_postProcessingVolume.profile}");
         ChromaticAberration chrmtcA;
         if (_postProcessingVolume.profile.TryGet(out vgt))
             _vignette = vgt;
         if (_postProcessingVolume.profile.TryGet(out chrmtcA))
             _chromaticAberration = chrmtcA;
+        if (this.gameObject.tag == "CutSceneCamera")
+            this.gameObject.SetActive(false);
 
+        Debug.Log($"{this.gameObject} | - | vignette = {_vignette}");
+        Debug.Log($"{this.gameObject} | - | chromaticAberration = {_chromaticAberration}");
     }
 
     public void ChangeVignette(float _startValue = 0, float _endValue = 1f, float _duration = 3f)
     {
+        Debug.Log(_vignette);
         if (vignetteCoroutine != null)
         {
             StopCoroutine(vignetteCoroutine);
