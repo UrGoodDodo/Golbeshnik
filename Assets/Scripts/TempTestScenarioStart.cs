@@ -10,7 +10,7 @@ public class TempTestScenarioStart : MonoBehaviour
         if(other.tag == "Player")
         {
             Debug.Log("Is Triggered");
-            ScenariosControll.Instance.StartScenario(1); 
+            ScenariosControll.Instance.StartScenario(4); 
         }
     }
 }
