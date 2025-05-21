@@ -11,7 +11,7 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
 
     GameObject[] stateTransitions;
 
-    public int nightNumber = 1;
+    public int nightNumber;
 
     private int curLoreStateNum = -1;
     private LoreState curLoreState = null;
@@ -20,21 +20,21 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
     {
         loreStates = CreateLoreStates();
         ConfigureTransitionsOnStage();
-        //foreach (var state in loreStates)
-        //{
-        //    Debug.Log(state.GetStateId());
-        //}
-        //curLoreState = loreStates.First();
+        if (nightNumber != 1)
+            foreach (var state in stateTransitions)
+                state.SetActive(false);
     }
 
     private void OnEnable()
     {
         GameEventsManager.instance.loreEvents.onLoreStateChange += TransitionLoreStates;
+        GameEventsManager.instance.loreEvents.onDayStateChange += SetActiveDay;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.loreEvents.onLoreStateChange -= TransitionLoreStates;
+        GameEventsManager.instance.loreEvents.onDayStateChange -= SetActiveDay;
     }
 
     void Start()
@@ -62,35 +62,48 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
 
     public void TransitionLoreStates() // Вызываем когда по сюжету надо (в основном точки)
     {
-        if (curLoreState != null) 
+        if (((int)GameCycle.Instance.SubState) == nightNumber) 
         {
-            curLoreState.Exit();
-        }
-
-        stateTransitions[curLoreStateNum + 1].SetActive(false); // т.к. предполагалось что транзит может и без триггеров это надо будет переделать (но надо ли)
-
-        curLoreStateNum++;
-        curLoreState = loreStates[curLoreStateNum];
-        curLoreState.Enter();
-
-        if (curLoreStateNum + 1 < stateTransitions.Length)
-            stateTransitions[curLoreStateNum + 1].SetActive(true); // и это
-
-        if (curLoreStateNum + 1 == stateTransitions.Length) 
-        {
-            switch (nightNumber)
+            if (curLoreState != null)
             {
-                case 1:
-                    GameCycle.Instance.StartDay(GameSubState.DAY_TWO);
-                    Destroy(this);
-                    break;
-                case 2:
-                    GameCycle.Instance.StartDay(GameSubState.DAY_THREE);
-                    break;
-                default: break;
+                curLoreState.Exit();
             }
+
+            stateTransitions[curLoreStateNum + 1].SetActive(false); // т.к. предполагалось что транзит может и без триггеров это надо будет переделать (но надо ли)
+
+            curLoreStateNum++;
+            curLoreState = loreStates[curLoreStateNum];
+            curLoreState.Enter();
+
+            if (curLoreStateNum + 1 < stateTransitions.Length)
+                stateTransitions[curLoreStateNum + 1].SetActive(true); // и это
+
+            if (curLoreStateNum + 1 == stateTransitions.Length) // лучше убрать отсюда
+            {
+                switch (nightNumber)
+                {
+                    case 1:
+                        GameCycle.Instance.StartDay(GameSubState.DAY_TWO);
+                        GameEventsManager.instance.loreEvents.MoveToNextDay(2);
+                        Destroy(gameObject);
+                        break;
+                    case 2:
+                        GameCycle.Instance.StartDay(GameSubState.DAY_THREE);
+                        GameEventsManager.instance.loreEvents.MoveToNextDay(3);
+                        Destroy(gameObject);
+                        break;
+                    default: break;
+                }
+            }
+
         }
-            
+
+    }
+
+    void SetActiveDay(int num) 
+    {
+        if (num == nightNumber)
+            stateTransitions[0].SetActive(true);
     }
 
     public void ConfigureTransitionsOnStage() 

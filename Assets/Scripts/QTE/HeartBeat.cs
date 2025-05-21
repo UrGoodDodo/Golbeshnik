@@ -23,8 +23,8 @@ public class HeartBeat : MonoBehaviour
 
     private List<float> scenario;
 
-    public event Action OnQTEFinish;
-    public event Action OnQTEStarted;
+    public static event Action OnQTEFinish;
+    public static event Action OnQTEStarted;
 
     private float secondSpeed = 100f;
     private float heartBeatTime = 58f;
@@ -50,14 +50,14 @@ public class HeartBeat : MonoBehaviour
 
     public async UniTask StartEvent()
     {
-        this.OnQTEStarted?.Invoke();
+        OnQTEStarted?.Invoke();
         GetNewScenario();
         GetNewSettings();
         _soundManager.Play("HeartPulsBreath");
         PlayBeatEnviroment();
         await this.HeartBeatAction();
         OnEventFinish();
-        this.OnQTEFinish?.Invoke();
+        OnQTEFinish?.Invoke();
     }
 
     private void GetNewScenario()

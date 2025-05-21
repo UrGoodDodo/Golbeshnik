@@ -11,4 +11,11 @@ public class LoreEvents
         if (onLoreStateChange != null)
             onLoreStateChange();
     }
+
+    public event Action<int> onDayStateChange;
+    public void MoveToNextDay(int num)
+    {
+        if (onDayStateChange != null)
+            onDayStateChange(num);
+    }
 }
