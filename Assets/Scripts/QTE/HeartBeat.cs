@@ -23,8 +23,9 @@ public class HeartBeat : MonoBehaviour
 
     private List<float> scenario;
 
-    public static event Action OnQTEFinish;
+    public static event Action OnQTEFinish; //кто добавил static это пиздец...
     public static event Action OnQTEStarted;
+    public event Action OnGameOver;
 
     private float secondSpeed = 100f;
     private float heartBeatTime = 58f;
@@ -170,7 +171,7 @@ public class HeartBeat : MonoBehaviour
         }
         else
         {
-            Debug.Log("GAME OVER");
+            this.OnGameOver?.Invoke();
         }
         _soundManager.Stop("HeartPulsBreath");
     }
