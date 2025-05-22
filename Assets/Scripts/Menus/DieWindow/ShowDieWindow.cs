@@ -45,7 +45,9 @@ public class ShowDieWindow : MonoBehaviour
         }
         childCanvasGroup.alpha = 1.0f;
         childCanvasGroup.interactable = true;
+        mainCanvasGroup.interactable = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        GameCycle.Instance.FinishGame();
     }
 }

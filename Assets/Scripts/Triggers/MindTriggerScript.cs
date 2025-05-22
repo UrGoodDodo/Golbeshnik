@@ -19,6 +19,11 @@ public class MindTriggerScript : GameMonoBehaviour
     protected bool _activateOtherTrigger = false;
     protected bool _isActive = false;
 
+    public bool IsActive
+    {
+        get { return _isActive; }
+    }
+
     public bool _ActivateOtherTrigger { get => _activateOtherTrigger; }
 
     public void Start()

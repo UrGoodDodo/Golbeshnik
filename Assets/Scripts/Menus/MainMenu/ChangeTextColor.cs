@@ -17,11 +17,13 @@ public class ChangeTextColor : MonoBehaviour
 
     public void HoverEnter() 
     {
+        Debug.Log("Is hover");
         txtMeshpro.color = Color.red;
     }
 
     public void HoverExit() 
     {
+        Debug.Log("Is hover exit");
         txtMeshpro.color = mainColor;
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine.Timeline;
 using UnityEngine.Playables;
 using Cinemachine;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using Cysharp.Threading.Tasks;
 
 public class ScenariosControll : GameMonoBehaviour, IScenario
