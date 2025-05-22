@@ -85,11 +85,13 @@ public class LoreStateManager : MonoBehaviour // Класс для одной ночи (будет 3 о
                     case 1:
                         GameCycle.Instance.StartDay(GameSubState.DAY_TWO);
                         GameEventsManager.instance.loreEvents.MoveToNextDay(2);
-                        Destroy(gameObject);
+                        GameEventsManager.instance.uishowEvents.EndDay();
+                       Destroy(gameObject);
                         break;
                     case 2:
                         GameCycle.Instance.StartDay(GameSubState.DAY_THREE);
                         GameEventsManager.instance.loreEvents.MoveToNextDay(3);
+                        GameEventsManager.instance.uishowEvents.EndDay();
                         Destroy(gameObject);
                         break;
                     default: break;

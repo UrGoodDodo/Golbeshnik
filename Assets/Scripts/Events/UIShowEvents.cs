@@ -39,4 +39,11 @@ public class UIShowEvents
         if (onUsingMatch != null)
             onUsingMatch();
     }
+
+    public event Action onEndingDay;
+    public void EndDay() 
+    {
+        if (onEndingDay != null)
+            onEndingDay();
+    }
 }
