@@ -29,8 +29,9 @@ public sealed class MindController : GameMonoBehaviour,
 
     private float currentVignette = 0f;
 
-    [SerializeField] private CameraBehaviour _mainCamera;
-    [SerializeField] private CameraBehaviour _cutsceneCamera;
+    //[SerializeField] private CameraBehaviour _mainCamera;
+    //[SerializeField] private CameraBehaviour _cutsceneCamera;
+    private List<CameraBehaviour> _cameras = new();
 
     public bool isQTE = false;
 
@@ -50,6 +51,7 @@ public sealed class MindController : GameMonoBehaviour,
         {
             Destroy(gameObject);
         }
+        _cameras = new List<CameraBehaviour>(FindObjectsOfType<CameraBehaviour>());
     }
 
     public void IncreaseMindStatus(int value)
@@ -68,27 +70,43 @@ public sealed class MindController : GameMonoBehaviour,
         Debug.Log(mindStatus);
         if (mindStatus == 0 && !isQTE)
         {
-            this.ChangeVignette(_mainCamera, currentVignette, vignetteMedium, 2f, 1);
-            this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMedium, 2f, 1);
+            foreach (var camera in _cameras)
+            {
+                this.ChangeVignette(camera, currentVignette, vignetteMedium, 2f, 1);
+            }
+            //this.ChangeVignette(_mainCamera, currentVignette, vignetteMedium, 2f, 1);
+            //this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMedium, 2f, 1);
             currentVignette = vignetteMedium;
             StartHeartBeatEvent();
         }
         if (mindStatus == 1 || mindStatus == 2)
         {
-            this.ChangeVignette(_mainCamera, currentVignette, vignetteMedium, 2f, 1);
-            this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMedium, 2f, 1);
+            foreach (var camera in _cameras)
+            {
+                this.ChangeVignette(camera, currentVignette, vignetteMedium, 2f, 1);
+            }
+            //this.ChangeVignette(_mainCamera, currentVignette, vignetteMedium, 2f, 1);
+            //this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMedium, 2f, 1);
             currentVignette = vignetteMedium;
         }
         if (mindStatus == 3 || mindStatus == 4)
         {
-            this.ChangeVignette(_mainCamera, currentVignette, vignetteLow, 2f, 0.5f);
-            this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteLow, 2f, 0.5f);
+            foreach (var camera in _cameras)
+            {
+                this.ChangeVignette(camera, currentVignette, vignetteLow, 2f, 0.5f);
+            }
+            //this.ChangeVignette(_mainCamera, currentVignette, vignetteLow, 2f, 0.5f);
+            //this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteLow, 2f, 0.5f);
             currentVignette = vignetteLow;
         }
         if (mindStatus == 5 || mindStatus == 6)
         {
-            this.ChangeVignette(_mainCamera, currentVignette, 0f, 2f, 0);
-            this.ChangeVignette(_cutsceneCamera, currentVignette, 0f, 2f, 0);
+            foreach (var camera in _cameras)
+            {
+                this.ChangeVignette(camera, currentVignette, 0f, 2f, 0);
+            }
+            //this.ChangeVignette(_mainCamera, currentVignette, 0f, 2f, 0);
+            //this.ChangeVignette(_cutsceneCamera, currentVignette, 0f, 2f, 0);
             currentVignette = 0f;
         }
     }
@@ -106,11 +124,19 @@ public sealed class MindController : GameMonoBehaviour,
 
     private IEnumerator CoroutineHearthPuls()
     {
-        this.ChangeVignette(_mainCamera, currentVignette, vignetteMax, 0.25f, 1);
-        this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMax, 0.25f, 1);
-       yield return new WaitForSeconds(0.25f);
-        this.ChangeVignette(_mainCamera, currentVignette, vignetteMedium, 0.25f, 1);
-        this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMedium, 0.25f, 1);
+        foreach (var camera in _cameras)
+        {
+            this.ChangeVignette(camera, currentVignette, vignetteMax, 0.25f, 1);
+        }
+        //this.ChangeVignette(_mainCamera, currentVignette, vignetteMax, 0.25f, 1);
+        //this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMax, 0.25f, 1);
+        yield return new WaitForSeconds(0.25f);
+        foreach (var camera in _cameras)
+        {
+            this.ChangeVignette(camera, currentVignette, vignetteMedium, 0.25f, 1);
+        }
+        //this.ChangeVignette(_mainCamera, currentVignette, vignetteMedium, 0.25f, 1);
+        //this.ChangeVignette(_cutsceneCamera, currentVignette, vignetteMedium, 0.25f, 1);
     }
 
     private void StartHeartBeatEvent()

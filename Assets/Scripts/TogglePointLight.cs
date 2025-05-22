@@ -1,10 +1,14 @@
 using UnityEngine;
 
-public class TogglePointLight : MonoBehaviour
+public class TogglePointLight : GameMonoBehaviour, IDayStartListener
 {
     public Light pointLight;
     bool isLightOn = false;
     private SoundManager soundManager;
+
+    [SerializeField] bool _isLightOff;
+    [SerializeField] bool _isLightOn;
+    [SerializeField] GameSubState _dayNumber;
 
     public bool Condition
     {
@@ -28,17 +32,10 @@ public class TogglePointLight : MonoBehaviour
 
     }
 
-
-    void Update()
-    {
-        
-    }
-
     public void ToggleLightOn()
     {
         Debug.Log(isLightOn);
         isLightOn = true;
-        //Debug.Log(isLightOn);
         pointLight.enabled = isLightOn;
         TurnOnSound();
         soundManager.PlayRandomCandleLightUp();
@@ -58,5 +55,14 @@ public class TogglePointLight : MonoBehaviour
     {
         AudioSource candleSource = gameObject.GetComponentInParent<AudioSource>();
         candleSource.Stop();
+    }
+
+    public void OnDayStart(GameSubState day)
+    {
+        if (day == _dayNumber)
+            if (_isLightOff)
+                ToggleLightOff();
+            else if (_isLightOn)
+                ToggleLightOn();
     }
 }
